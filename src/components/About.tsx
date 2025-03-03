@@ -94,29 +94,22 @@ const About = () => {
               )}
             >
               <h3 className="text-xl font-bold mb-4">Skills & Expertise</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {skills.map((skill, index) => (
                   <div 
                     key={skill.name}
                     className={cn(
-                      "opacity-0 transition-all duration-500",
+                      "bg-secondary/50 rounded-lg p-3 opacity-0 transition-all duration-500 transform hover:scale-105 hover:bg-secondary/80",
                       isSkillsInView && "opacity-100",
-                      { "transition-delay-100": index % 2 === 1,
-                        "transition-delay-200": index % 2 === 0 && index > 0 }
+                      { "transition-delay-100": index % 3 === 1,
+                        "transition-delay-200": index % 3 === 2 }
                     )}
+                    style={{ 
+                      transitionDelay: `${100 + index * 50}ms` 
+                    }}
                   >
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="text-center">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
-                      <div 
-                        className="bg-primary h-full rounded-full transform scale-x-0 origin-left transition-transform duration-1000 ease-out"
-                        style={{ 
-                          transform: isSkillsInView ? `scaleX(${skill.level / 100})` : 'scaleX(0)',
-                          transitionDelay: `${200 + index * 100}ms`
-                        }}
-                      ></div>
                     </div>
                   </div>
                 ))}

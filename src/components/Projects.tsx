@@ -3,7 +3,7 @@ import { projects } from '@/lib/constants';
 import { useInView } from '@/lib/animations';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,31 +80,49 @@ const Projects = () => {
                     {project.description}
                   </p>
                   
-                  <div className="flex items-center space-x-3">
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary transition-colors"
-                      aria-label={`View ${project.title} on GitHub`}
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <a 
+                        href={project.githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary transition-colors"
+                        aria-label={`View ${project.title} on GitHub`}
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                      
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary transition-colors"
+                        aria-label={`Visit ${project.title} live site`}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    </div>
                     
                     <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary transition-colors"
-                      aria-label={`Visit ${project.title} live site`}
+                      href={`/projects/${project.id}`}
+                      className="flex items-center text-sm font-medium text-primary hover:underline"
                     >
-                      <ExternalLink className="w-5 h-5" />
+                      More <ArrowRight className="ml-1 w-4 h-4" />
                     </a>
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <a 
+            href="/projects" 
+            className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            View All Projects <ArrowRight className="ml-2 w-5 h-5" />
+          </a>
         </div>
       </div>
     </section>
