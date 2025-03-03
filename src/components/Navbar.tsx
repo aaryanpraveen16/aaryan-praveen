@@ -10,6 +10,7 @@ const Navbar = () => {
   const scrollY = useScrollPosition();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +36,15 @@ const Navbar = () => {
     };
   }, []);
 
+  // Show the logo after a delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLogo(true);
+    }, 3000); // Total time of typing animation + delay before minimizing
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <header
       className={cn(
@@ -47,9 +57,14 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         <a 
           href="#home" 
-          className="text-xl font-medium transition-opacity hover:opacity-80"
+          className={cn(
+            "text-xl font-medium transition-all duration-500 relative",
+            showLogo 
+              ? "opacity-100 transform translate-y-0" 
+              : "opacity-0 transform -translate-y-4"
+          )}
         >
-          Portfolio
+          Aaryan
         </a>
 
         {/* Desktop Navigation */}
