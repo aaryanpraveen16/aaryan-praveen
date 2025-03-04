@@ -45,6 +45,13 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMenuOpen]);
   return (
     <header
       className={cn(
@@ -85,7 +92,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 z-50">
           <ThemeToggle />
           
           {/* Mobile menu button */}
@@ -102,8 +109,8 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/95 backdrop-blur-md z-40 transition-transform duration-300 md:hidden',
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          'fixed inset-0 bg-background/95 backdrop-blur-md z-40 transition-transform duration-300 md:hidden h-screen',
+          isMenuOpen ? 'translate-x-0 bottom-0' : 'translate-x-full'
         )}
       >
         <nav className="flex flex-col items-center justify-center h-full space-y-8">

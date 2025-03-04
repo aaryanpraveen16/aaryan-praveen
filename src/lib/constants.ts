@@ -113,9 +113,9 @@ export const skills = [
 
 
 export const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com' },
-  { name: 'LinkedIn', url: 'https://linkedin.com' },
-  { name: 'Twitter', url: 'https://twitter.com' },
+  { name: 'GitHub', url: 'https://github.com/aaryanpraveen16' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/aaryanpraveen/' },
+  // { name: 'Twitter', url: 'https://twitter.com' },
 ];
 
 export const achievements = [
