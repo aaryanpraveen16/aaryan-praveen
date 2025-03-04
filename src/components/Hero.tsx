@@ -80,14 +80,14 @@ const Hero = () => {
             Code, <span className="relative inline-block">
             Cloud,  
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
-              </span> and Crypto - Engineering the Next  <span className="relative inline-block">
-              Generation
+              </span> and Crypto - Building Scalable & Secure   <span className="relative inline-block">
+              Solutions
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
               </span>
             </h1>
             
             <p className={`animate-on-load opacity-0 text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl ${animationComplete ? '' : 'hidden'}`}>
-            I specialize in full-stack development, cloud infrastructure, and blockchain technology, creating high-performance, secure, and intuitive applications.
+            I specialize in full-stack development, cloud infrastructure, and blockchain technology, engineering high-performance, secure, and user-centric applications.
             </p>
             
             <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${animationComplete ? '' : 'hidden'}`}>

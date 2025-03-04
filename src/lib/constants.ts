@@ -129,7 +129,7 @@ export const achievements = [
   {
     id: 2,
     title: 'TFC Hackathon - Best AI Solution',
-    date: 'November 2022',
+    date: 'Feb 2025',
     description: 'Developed an AI-powered policy tracking platform, leveraging NLP and semantic search to provide real-time insights on regulatory changes, winning the Best AI Solution award.',
     icon: 'medal'
   },
