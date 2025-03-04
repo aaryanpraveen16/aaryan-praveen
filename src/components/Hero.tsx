@@ -73,22 +73,21 @@ const Hero = () => {
         ) : (
           <>
             <span className={`animate-on-load opacity-0 inline-block px-4 py-1.5 mb-6 text-sm rounded-full bg-secondary/80 text-secondary-foreground backdrop-blur-sm ${animationComplete ? '' : 'hidden'}`}>
-              Frontend Developer & UI Designer
+             Software Engineer
             </span>
             
             <h1 className={`animate-on-load opacity-0 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-4xl ${animationComplete ? '' : 'hidden'}`}>
-              Creating <span className="relative inline-block">
-                digital
+              Building <span className="relative inline-block">
+                Scalable
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
-              </span> experiences that <span className="relative inline-block">
-                matter
+              </span> & Intelligent Digital  <span className="relative inline-block">
+              Solutions
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
               </span>
             </h1>
             
             <p className={`animate-on-load opacity-0 text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl ${animationComplete ? '' : 'hidden'}`}>
-              I build sleek, intuitive interfaces and experiences that help businesses
-              connect with their users in meaningful ways.
+            I specialize in full-stack development, cloud infrastructure, and blockchain technology, creating high-performance, secure, and intuitive applications.
             </p>
             
             <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${animationComplete ? '' : 'hidden'}`}>

@@ -3,7 +3,7 @@ import { skills } from '@/lib/constants';
 import { useInView } from '@/lib/animations';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
-
+import profilePic from "../assets/profile-pic.jpg";
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, 0.1);
@@ -55,7 +55,7 @@ const About = () => {
           >
             <div className="aspect-square rounded-2xl overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" 
+                src= {profilePic}
                 alt="Professional portrait" 
                 className="w-full h-full object-cover"
               />
@@ -71,14 +71,12 @@ const About = () => {
                 isBioInView && "opacity-100 translate-x-0"
               )}
             >
-              <h3 className="text-2xl font-bold mb-4">Hello, I'm John Doe</h3>
+              <h3 className="text-2xl font-bold mb-4">Hello, I'm Aaryan</h3>
               <p className="text-muted-foreground mb-6">
-                I'm a passionate frontend developer and UI designer with over 5 years of experience
-                creating beautiful, functional, and user-centered digital experiences. 
+              I'm a full-stack software engineer with a background in electronics engineering, now focused on building scalable, secure, and intelligent applications.
               </p>
               <p className="text-muted-foreground mb-6">
-                My approach combines technical expertise with creative problem-solving. I believe
-                that great design is about making complex things simple and intuitive.
+              With 2 years of industry experience, I’ve worked across frontend, backend, and cloud technologies, crafting intuitive user experiences and robust backend architectures.
               </p>
               <p className="text-muted-foreground">
                 When I'm not coding, you'll find me exploring new design trends, contributing to

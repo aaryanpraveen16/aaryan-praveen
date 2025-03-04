@@ -1,9 +1,9 @@
 export const navLinks = [
-  { name: 'Home', href: '#home' },
+  // { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
-  { name: 'Achievements', href: '#achievements' },
+  // { name: 'Achievements', href: '#achievements' },
   { name: 'Projects', href: '#projects' },
   { name: 'Testimonials', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
@@ -64,14 +64,47 @@ export const testimonials = [
 ];
 
 export const skills = [
+  // Frontend Technologies
   { name: 'JavaScript', level: 90 },
   { name: 'TypeScript', level: 85 },
   { name: 'React', level: 92 },
   { name: 'Next.js', level: 88 },
-  { name: 'Node.js', level: 78 },
+  { name: 'Redux', level: 85 },
   { name: 'Tailwind CSS', level: 95 },
-  { name: 'UI/UX Design', level: 80 },
+  // { name: 'Material-UI', level: 80 },
+  // { name: 'D3.js', level: 75 },
+  // { name: 'UI/UX Design', level: 80 },
+  { name: 'Figma', level: 80 },
+  // Backend Technologies
+  { name: 'Node.js', level: 78 },
+  { name: 'Express.js', level: 80 },
+  // { name: 'FastAPI', level: 82 },
+  // { name: 'Spring Boot', level: 76 },
+
+  // Databases & Cloud
+  { name: 'MongoDB', level: 85 },
+  // { name: 'PostgreSQL', level: 80 },
+  // { name: 'Snowflake', level: 75 },
+  { name: 'MySQL', level: 82 },
+  // { name: 'Pinecone', level: 78 },
+  { name: 'AWS (EC2, S3)', level: 80 },
+
+  // DevOps & Tools
+  { name: 'Docker', level: 85 },
+  { name: 'Kubernetes', level: 75 },
+  { name: 'CI/CD', level: 80 },
+  // { name: 'Linux', level: 85 },
+
+  // // Machine Learning / AI
+  // { name: 'OpenAI APIs', level: 78 },
+  // { name: 'Hugging Face', level: 75 },
+  // { name: 'Retrieval-Augmented Generation (RAGs)', level: 70 },
+
+  // Other Skills
+  // { name: 'WebSockets', level: 80 },
+  // { name: 'GraphQL', level: 75 },
 ];
+
 
 export const socialLinks = [
   { name: 'GitHub', url: 'https://github.com' },
@@ -82,93 +115,64 @@ export const socialLinks = [
 export const achievements = [
   {
     id: 1,
-    title: 'Outstanding Developer Award',
+    title: 'Budding Star Award - Flair Labs',
     date: 'June 2023',
-    description: 'Recognized for exceptional contributions to the team\'s success and technical innovation during the company-wide recognition event.',
+    description: 'Awarded for outstanding contributions to software development, security enhancements, and performance optimizations within the organization.',
     icon: 'trophy'
   },
   {
     id: 2,
-    title: 'Best Mobile App Design',
+    title: 'TFC Hackathon - Best AI Solution',
     date: 'November 2022',
-    description: 'Won first place in the annual design competition for creating an intuitive and accessible mobile banking application interface.',
+    description: 'Developed an AI-powered policy tracking platform, leveraging NLP and semantic search to provide real-time insights on regulatory changes, winning the Best AI Solution award.',
     icon: 'medal'
   },
   {
     id: 3,
-    title: 'Open Source Contributor',
-    date: '2021 - Present',
-    description: 'Active contributor to several major open-source projects with over 50 merged pull requests and recognition from the community.',
+    title: 'Government of India Copyright - Research Project',
+    date: 'April 2021',
+    description: 'Received a **Government of India Copyright** for a research project on parallel computation of special functions using GPU acceleration in MATLAB.',
     icon: 'award'
-  },
-  {
-    id: 4,
-    title: 'Hackathon Winner',
-    date: 'October 2021',
-    description: 'Led a team of four to victory in the 48-hour hackathon, developing an innovative solution for local community challenges.',
-    icon: 'trophy'
-  },
-  {
-    id: 5,
-    title: 'Technical Paper Publication',
-    date: 'May 2021',
-    description: 'Published research paper on modern web architecture patterns in the International Journal of Web Engineering.',
-    icon: 'award'
-  },
-  {
-    id: 6,
-    title: 'Distinguished Speaker',
-    date: 'March 2020',
-    description: 'Featured speaker at three major tech conferences, presenting on front-end architecture and performance optimization.',
-    icon: 'medal'
   }
 ];
+
 
 export const education = [
   {
     id: 1,
-    degree: 'Master of Science in Computer Science',
-    institution: 'Stanford University',
-    period: '2018 - 2020',
-    gpa: '3.9/4.0',
-    courses: [
-      'Advanced Algorithms',
-      'Machine Learning',
-      'Human-Computer Interaction',
-      'Database Systems',
-      'Distributed Systems',
-      'Computer Vision',
-      'Natural Language Processing',
-      'Cloud Computing'
-    ],
-    thesis: 'Optimizing Neural Network Architectures for Real-time Web Applications',
-    achievements: [
-      'Graduate Research Assistant in the Human-Computer Interaction Lab',
-      'Teaching Assistant for undergraduate Computer Science courses',
-      'Winner of the Graduate Student Research Award'
-    ]
-  },
-  {
-    id: 2,
-    degree: 'Bachelor of Science in Software Engineering',
-    institution: 'University of California, Berkeley',
-    period: '2014 - 2018',
-    gpa: '3.8/4.0',
+    degree: 'Master of Science in Software Engineering',
+    institution: 'Northeastern University',
+    period: '2023 - 2025',
+    gpa: '3.6/4.0',
     courses: [
       'Data Structures and Algorithms',
       'Operating Systems',
-      'Software Engineering',
+      'Object Oriented Design',
+      'Design Patterns',
       'Web Development',
+      'UI/UX Design'
+    ],
+    // thesis: 'Optimizing Neural Network Architectures for Real-time Web Applications',
+    // achievements: [
+    //   'Graduate Research Assistant in the Human-Computer Interaction Lab',
+    //   'Teaching Assistant for undergraduate Computer Science courses',
+    //   'Winner of the Graduate Student Research Award'
+    // ]
+  },
+  {
+    id: 2,
+    degree: 'Bachelor of Science in Electronics Engineering',
+    institution: 'University of Mumbai',
+    period: '2017 - 2021',
+    gpa: '3.2/4.0',
+    courses: [
       'Computer Networks',
-      'Artificial Intelligence',
-      'Mobile Application Development',
-      'UI/UX Design Principles'
+      'Computer Orgasnization & Architecture',
+      'Database Systems',
+      'IOT'
     ],
     achievements: [
-      'Dean\'s List for all semesters',
-      'President of the Computer Science Students Association',
-      'Winner of the Undergraduate Innovation Challenge',
-      'Internship at Google during junior year'
+     ' Received Government of India Copyright for Final Year Project: "A Method for Parallel Computation of Chebyshev Polynomials, Error Functions, and Scorer Functions"'
     ]
   }
 ];
@@ -176,59 +180,52 @@ export const education = [
 export const workExperience = [
   {
     id: 1,
-    position: 'Senior Frontend Developer',
-    company: 'TechInnovate Inc.',
-    location: 'San Francisco, CA',
-    period: 'Jan 2022 - Present',
-    description: 'Leading the frontend development team responsible for creating and maintaining the company\'s flagship product, a SaaS platform serving over 500,000 users.',
+    position: 'Research Assistant',
+    company: 'Northeastern University',
+    location: 'Boston, MA',
+    period: 'Jan 2025 - Present',
+    description: 'Conducting research on microscopic traffic simulation models, focusing on optimizing lane-switching algorithms and traffic flow dynamics.',
     responsibilities: [
-      'Architect and implement scalable frontend solutions using React and TypeScript',
-      'Lead code reviews and technical discussions to ensure high code quality',
-      'Collaborate with UX designers to transform wireframes into user-friendly interfaces',
-      'Optimize application performance and ensure cross-browser compatibility',
-      'Mentor junior developers and conduct technical interviews'
+      'Reviewed and analyzed microscopic traffic simulation models, including the Intelligent Driver Model (IDM)',
+      'Implemented lane-switching algorithms inspired by the MOBIL model to improve traffic flow and reduce congestion',
+      'Designed experimental protocols and performed data analysis using NumPy and Matplotlib',
+      'Developed a simulation algorithm to enhance traffic dynamics and reduce computational overhead'
     ],
-    achievements: [
-      'Reduced application load time by 45% through code optimization and lazy loading techniques',
-      'Implemented a component library that increased development speed by 30%',
-      'Led the successful migration from legacy codebase to modern React architecture'
-    ],
-    technologies: ['React', 'TypeScript', 'Redux', 'Tailwind CSS', 'Jest', 'GraphQL']
+    technologies: ['Python', 'NumPy', 'Matplotlib']
   },
   {
     id: 2,
-    position: 'Frontend Developer',
-    company: 'DataViz Solutions',
-    location: 'Seattle, WA',
-    period: 'Mar 2020 - Dec 2021',
-    description: 'Worked in an agile team developing interactive data visualization tools for enterprise clients in the finance and healthcare sectors.',
+    position: 'Associate Full Stack Software Engineer',
+    company: 'Flair Labs',
+    location: 'India',
+    period: 'Oct 2021 - Apr 2023',
+    description: 'Contributed to the development of scalable frontend and backend solutions for enterprise SaaS applications, focusing on performance, security, and customization.',
     responsibilities: [
-      'Developed responsive user interfaces with React and D3.js',
-      'Built reusable components and libraries for future use',
-      'Implemented complex charts and interactive dashboards',
-      'Collaborated with backend developers to integrate APIs',
-      'Participated in sprint planning and retrospective meetings'
+      'Developed a frontend library using Lit Elements & Shadow DOM, improving UI performance and reusability',
+      'Integrated the frontend library into a React-based SaaS KYC platform for enhanced customization',
+      'Containerized microservices using Docker to standardize environments across Dev, Staging, and Production',
+      'Designed and optimized database schemas, implementing stored procedures and views',
+      'Strengthened Java Spring Boot microservices by mitigating security vulnerabilities'
     ],
     achievements: [
-      'Created a visualization framework that reduced development time for new charts by 60%',
-      'Improved accessibility compliance to WCAG AA standards across all products'
+      'Received the Budding Star Award for outstanding contributions and professional growth',
     ],
-    technologies: ['React', 'JavaScript', 'D3.js', 'SASS', 'Webpack', 'RESTful APIs']
+    technologies: ['React.js', 'JavaScript', 'Spring Boot', 'Typescript', 'MySQL', 'Docker', 'Kubernetes']
   },
   {
     id: 3,
-    position: 'Web Developer Intern',
-    company: 'CreativeWeb Agency',
-    location: 'Boston, MA',
-    period: 'May 2019 - Aug 2019',
-    description: 'Assisted in developing websites and web applications for clients across various industries during a summer internship.',
+    position: 'Data Analytics Intern',
+    company: 'Ramrao Adik Institute of Technology',
+    location: 'Navi Mumbai, MH, India',
+    period: 'June 2020 - August 2020',
+    description: 'Performed exploratory data analysis and developed predictive models to analyze COVID-19 trends, supporting resource allocation for hospitals.',
     responsibilities: [
-      'Implemented responsive layouts using HTML, CSS, and JavaScript',
-      'Fixed bugs and improved existing features',
-      'Assisted senior developers with larger projects',
-      'Created content management systems using WordPress',
-      'Participated in client meetings to gather requirements'
+      'Conducted Exploratory Data Analysis (EDA) on India’s COVID-19 dataset to uncover trends and visualize disease spread',
+      'Developed interactive visualizations using Matplotlib and Seaborn for real-time pandemic tracking',
+      'Implemented the Holt-Winters time series forecasting model to predict COVID-19 cases',
+      'Evaluated model accuracy using Mean Absolute Error (MAE), achieving a 5% error rate'
     ],
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'WordPress', 'PHP']
+    technologies: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Time Series Analysis']
   }
 ];
+
