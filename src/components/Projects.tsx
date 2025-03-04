@@ -92,7 +92,7 @@ const Projects = () => {
                         <Github className="w-5 h-5" />
                       </a>
                       
-                      <a 
+                      {/* <a 
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
@@ -100,7 +100,7 @@ const Projects = () => {
                         aria-label={`Visit ${project.title} live site`}
                       >
                         <ExternalLink className="w-5 h-5" />
-                      </a>
+                      </a> */}
                     </div>
                     
                     <a 
@@ -118,7 +118,7 @@ const Projects = () => {
         
         <div className="mt-12 text-center">
           <a 
-            href="/projects" 
+            href="https://aaryanpraveen.wixsite.com/portfolio/projects" 
             className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             View All Projects <ArrowRight className="ml-2 w-5 h-5" />

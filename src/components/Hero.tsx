@@ -77,11 +77,11 @@ const Hero = () => {
             </span>
             
             <h1 className={`animate-on-load opacity-0 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-4xl ${animationComplete ? '' : 'hidden'}`}>
-              Building <span className="relative inline-block">
-                Scalable
+            Code, <span className="relative inline-block">
+            Cloud,  
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
-              </span> & Intelligent Digital  <span className="relative inline-block">
-              Solutions
+              </span> and Crypto - Engineering the Next  <span className="relative inline-block">
+              Generation
                 <span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span>
               </span>
             </h1>

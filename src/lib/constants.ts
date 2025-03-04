@@ -1,3 +1,8 @@
+import PolySightsAI from "../assets/polySightsAI.jpg"
+import NimbleDev from "../assets/nimble-dev.png"
+import CoinGuard from "../assets/coinguard.jpg"
+import Daljeet from "../assets/Daljeet.jpeg"
+import Nirmal from "../assets/Nirmal.jpeg"
 export const navLinks = [
   // { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
@@ -12,55 +17,56 @@ export const navLinks = [
 export const projects = [
   {
     id: 1,
-    title: 'Portfolio Website',
-    description: 'A modern, responsive portfolio website built with React and Tailwind CSS.',
-    image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['React', 'TypeScript', 'Tailwind CSS'],
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
+    title: 'PoliSightsAI',
+    description: 'An AI-powered platform that helps small businesses track and analyze regulatory changes in real-time using NLP and vector search.',
+    image: PolySightsAI,
+    tags: ['React', 'FastAPI', 'OpenAI', 'Airflow', 'Snowflake', 'MongoDB'],
+    githubUrl: 'https://github.com/TFC-Civic-Tech-Hackathon/PoliSightsAI',
+    // liveUrl: 'https://example.com',
   },
   {
     id: 2,
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with product listings, cart functionality, and payment processing.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['Next.js', 'Node.js', 'Stripe', 'MongoDB'],
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
+    title: 'NimbleDev',
+    description: 'A WebSocket-powered interactive development environment with a CLI, file tree, and live preview for seamless coding and debugging.',
+    image: NimbleDev,
+    tags: ['React', 'Node.js', 'Express', 'Docker', 'Kubernetes', 'WebSockets'],
+    githubUrl: 'https://github.com/aaryanpraveen16/Nimble-Dev',
+    // liveUrl: 'https://example.com',
   },
   {
     id: 3,
-    title: 'AI Image Generator',
-    description: 'An application that generates images based on text prompts using machine learning models.',
-    image: 'https://images.unsplash.com/photo-1591453089816-0fbb971b454c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    tags: ['React', 'Python', 'TensorFlow', 'OpenAI API'],
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
-  },
+    title: 'CoinGuard',
+    description: 'A hierarchical deterministic (HD) cryptocurrency wallet supporting Ethereum & Solana with secure key management and transactions.',
+    image: CoinGuard,
+    tags: ['React', 'Node.js', 'Solana', 'Ethereum', 'Blockchain', 'Web3'],
+    githubUrl: 'https://github.com/aaryanpraveen16/CoinGuard',
+    // liveUrl: 'https://example.com',
+  }
 ];
+
 
 export const testimonials = [
   {
     id: 1,
-    name: 'Sarah Johnson',
-    role: 'Product Manager at TechCorp',
-    content: 'Working with this developer was a fantastic experience. Their attention to detail and ability to transform our ideas into a functional and beautiful website exceeded our expectations.',
-    avatar: 'https://i.pravatar.cc/150?img=1',
+    name: 'Nirmal Parmar',
+    role: 'SDE 2 at Fynd Jio',
+    content: "Aaryan is the kind of engineer you want on your team when you're dealing with complex problems that require both deep technical expertise and sharp debugging skills. I've seen him methodically break down intricate issues, often identifying solutions faster than expected. His ability to approach challenges with a structured mindset makes him a valuable asset in high-stakes situations. Beyond his technical acumen, Aaryan is a strong communicator who articulates his thoughts clearly and collaborates seamlessly across teams. He doesn't just solve problems, he makes sure everyone understands the reasoning behind his solutions. That level of clarity and confidence is rare and it makes working with him both productive and rewarding.",
+    avatar: Nirmal,
   },
   {
     id: 2,
-    name: 'Michael Chen',
-    role: 'Startup Founder',
-    content: 'Extremely professional and skilled. They delivered our project on time and was always responsive to our feedback. We\'ll definitely work together on future projects.',
-    avatar: 'https://i.pravatar.cc/150?img=8',
+    name: 'Daljeet Malhotra',
+    role: 'Founder and Director at Flair Labs',
+    content: "As a Software Engineer, Aaryan has served Flair Labs, where I have observed him working. Prima facie, Aaryan is a diligent professional, committed to his deliverables, quality and team-causes. He is open to solving complex problems without any hesitation. He is an explorer and sees through challenges with confidence. Observing him communicate is reassuring about his confidence and knowhow. He speaks with conviction and is very respectful. Aaryan is an ambitious soul, aiming high and more importantly, has a plan. He has already firmed up as a software engineer and I see his leadership traits unfolding. I wish Aaryan the very best and am confident to see him succeeding all along his career.",
+    avatar: Daljeet,
   },
-  {
-    id: 3,
-    name: 'Emily Rodriguez',
-    role: 'Marketing Director',
-    content: 'I was impressed by both the technical expertise and creative input. They not only built exactly what we needed but also suggested improvements we hadn\'t thought of.',
-    avatar: 'https://i.pravatar.cc/150?img=5',
-  },
+  // {
+  //   id: 3,
+  //   name: 'Emily Rodriguez',
+  //   role: 'Marketing Director',
+  //   content: 'I was impressed by both the technical expertise and creative input. They not only built exactly what we needed but also suggested improvements we hadn\'t thought of.',
+  //   avatar: 'https://i.pravatar.cc/150?img=5',
+  // },
 ];
 
 export const skills = [

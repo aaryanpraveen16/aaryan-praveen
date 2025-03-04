@@ -37,7 +37,7 @@ const Testimonials = () => {
             "text-3xl md:text-4xl font-bold mb-4 opacity-0 transition-opacity duration-700 delay-100",
             isInView && "opacity-100"
           )}>
-            Client Feedback
+            Professional Endorsements
           </h2>
           <p className={cn(
             "text-muted-foreground opacity-0 transition-opacity duration-700 delay-200",

@@ -113,11 +113,11 @@ const Contact = () => {
             <div>
               <h4 className="text-lg font-medium mb-4">Email me directly</h4>
               <a 
-                href="mailto:hello@example.com"
+                href="mailto:aaryan.praveen@gmail.com"
                 className="text-primary hover:underline flex items-center"
               >
                 <Mail className="w-5 h-5 mr-2" />
-                hello@example.com
+                aaryan.praveen@gmail.com
               </a>
             </div>
           </div>
