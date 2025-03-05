@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ExternalLink, Github, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const AllProjects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -103,7 +104,8 @@ const AllProjects = () => {
                         <Github className="w-5 h-5" />
                       </a>
                       
-                      {project.liveUrl && (
+                      {/* Only render the liveUrl button if the property exists */}
+                      {'liveUrl' in project && project.liveUrl && (
                         <a 
                           href={project.liveUrl} 
                           target="_blank" 
@@ -116,12 +118,12 @@ const AllProjects = () => {
                       )}
                     </div>
                     
-                    <a 
-                      href={`/projects/${project.id}`}
+                    <Link 
+                      to={`/projects/${project.id}`}
                       className="flex items-center text-sm font-medium text-primary hover:underline"
                     >
                       Details
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -130,12 +132,12 @@ const AllProjects = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <a 
-            href="/"
+          <Link 
+            to="/"
             className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
       
