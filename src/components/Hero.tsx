@@ -1,4 +1,3 @@
-
 import { useParallax } from '@/lib/animations';
 import { ArrowDown } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
@@ -11,7 +10,6 @@ const Hero = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   
   useEffect(() => {
-    // Animation for hero elements on load
     if (animationComplete) {
       const timers: NodeJS.Timeout[] = [];
       
@@ -32,10 +30,8 @@ const Hero = () => {
   }, [animationComplete]);
 
   const handleTypingComplete = () => {
-    // Delay before minimizing
     setTimeout(() => {
       setShowName(false);
-      // Delay before showing the rest of the content
       setTimeout(() => {
         setAnimationComplete(true);
       }, 500);
@@ -48,7 +44,6 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Shapes */}
       <div className="absolute inset-0 -z-10">
         <div 
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 dark:bg-primary/10 filter blur-3xl"
@@ -110,9 +105,8 @@ const Hero = () => {
       
       <a 
         href="#about" 
-        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
+        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
       >
-        <span className="text-sm mb-2">Scroll Down</span>
         <ArrowDown className="w-5 h-5 animate-bounce" />
       </a>
     </section>
