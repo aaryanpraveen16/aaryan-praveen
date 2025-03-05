@@ -79,7 +79,7 @@ const Education = () => {
                       ))}
                     </div>
                     
-                    {edu.thesis && (
+                    {'thesis' in edu && edu.thesis && (
                       <div className="mt-6 pt-6 border-t border-border">
                         <h4 className="font-semibold mb-2">Thesis</h4>
                         <p className="text-sm text-muted-foreground">{edu.thesis}</p>
