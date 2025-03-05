@@ -3,6 +3,8 @@ import NimbleDev from "../assets/nimble-dev.png"
 import CoinGuard from "../assets/coinguard.jpg"
 import Daljeet from "../assets/Daljeet.jpeg"
 import Nirmal from "../assets/Nirmal.jpeg"
+import CureConnect from "../assets/cure-connect.png"
+import PledgePilot from "../assets/pledge-pilot.jpg"
 export const navLinks = [
   // { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
@@ -40,6 +42,24 @@ export const projects = [
     image: CoinGuard,
     tags: ['React', 'Node.js', 'Solana', 'Ethereum', 'Blockchain', 'Web3'],
     githubUrl: 'https://github.com/aaryanpraveen16/CoinGuard',
+    // liveUrl: 'https://example.com',
+  },
+  {
+    id: 4,
+    title: 'CureConnect – Health Monitoring & Management App',
+    description: 'Designed a health monitoring app that integrates with wearable devices to track health metrics, manage prescriptions, and ensure user-friendly navigation.',
+    image: CureConnect,
+    tags: ['Figma', 'UX Research', 'Prototyping', 'Information Architecture'],
+    // githubUrl: 'https://github.com/', (if applicable)
+    // liveUrl: 'https://example.com',
+  },
+  {
+    id: 5,
+    title: 'PledgePilot',
+    description: 'A crowdfunding platform enabling hobbyists to efficiently launch and manage campaigns. Integrated dynamic data visualization and gamified rewards to enhance user engagement.',
+    image: PledgePilot,
+    tags: ['React.js', 'Material-UI', 'D3.js', 'Redux', 'MongoDB'],
+    githubUrl: 'https://github.com/aaryanpraveen16/pledgepilot',
     // liveUrl: 'https://example.com',
   }
 ];
