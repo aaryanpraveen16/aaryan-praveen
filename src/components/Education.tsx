@@ -1,9 +1,19 @@
-
 import { useRef } from 'react';
 import { useInView } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 import { GraduationCap, BookOpen } from 'lucide-react';
 import { education } from '@/lib/constants';
+
+interface EducationItem {
+  id: number;
+  degree: string;
+  institution: string;
+  period: string;
+  gpa: string;
+  courses: string[];
+  achievements?: string[];
+  thesis?: React.ReactNode;
+}
 
 const Education = () => {
   const sectionRef = useRef<HTMLElement>(null);

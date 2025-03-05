@@ -110,7 +110,7 @@ const Hero = () => {
       
       <a 
         href="#about" 
-        className={`absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
+        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
       >
         <span className="text-sm mb-2">Scroll Down</span>
         <ArrowDown className="w-5 h-5 animate-bounce" />
