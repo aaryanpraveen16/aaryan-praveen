@@ -1,12 +1,9 @@
-
 import { useParallax } from '@/lib/animations';
 import { ArrowDown } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import TypedName from './TypedName';
-import { useTheme } from '@/context/ThemeContext';
 
 const Hero = () => {
-  const { theme } = useTheme();
   const parallaxOffset = useParallax(0.05);
   const heroRef = useRef<HTMLElement>(null);
   const [showName, setShowName] = useState(true);
@@ -102,16 +99,6 @@ const Hero = () => {
                 Contact Me
               </a>
             </div>
-            
-            <div className={`animate-on-load opacity-0 mt-8 max-w-md mx-auto ${animationComplete ? '' : 'hidden'}`}>
-              <img 
-                src={theme === 'dark' 
-                  ? 'public/lovable-uploads/b06640f2-1b2e-46e5-ab85-f7037f729c46.png' 
-                  : 'public/lovable-uploads/160a81ec-022f-4d14-9925-5c9a1d8376da.png'} 
-                alt="Software Engineer illustration" 
-                className="w-full h-auto rounded-lg shadow-lg transition-all duration-500"
-              />
-            </div>
           </>
         )}
       </div>
@@ -119,7 +106,6 @@ const Hero = () => {
       <a 
         href="#about" 
         className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
-        aria-label="Scroll to About section"
       >
         <ArrowDown className="w-5 h-5 animate-bounce" />
       </a>
