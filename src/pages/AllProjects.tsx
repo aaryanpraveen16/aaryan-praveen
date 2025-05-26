@@ -119,7 +119,7 @@ const AllProjects = () => {
                     </div>
                     
                     <Link 
-                      to={`/projects/${project.id}`}
+                      to={`/project/${project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}`}
                       className="flex items-center text-sm font-medium text-primary hover:underline"
                     >
                       Details

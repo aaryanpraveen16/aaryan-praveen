@@ -5,6 +5,7 @@ import Daljeet from "../assets/Daljeet.jpeg"
 import Nirmal from "../assets/Nirmal.jpeg"
 import CureConnect from "../assets/cure-connect.png"
 import PledgePilot from "../assets/pledge-pilot.jpg"
+
 export const navLinks = [
   // { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
@@ -24,6 +25,15 @@ export const projects = [
     image: PolySightsAI,
     tags: ['React', 'FastAPI', 'OpenAI', 'Airflow', 'Snowflake', 'MongoDB'],
     githubUrl: 'https://github.com/TFC-Civic-Tech-Hackathon/PoliSightsAI',
+    fullDescription: 'PoliSightsAI is a comprehensive AI-powered platform designed to help small businesses stay informed about regulatory changes that could impact their operations. The platform leverages advanced Natural Language Processing (NLP) and vector search technologies to monitor, analyze, and deliver real-time insights on policy changes across various industries and jurisdictions. Built with a modern tech stack including React for the frontend, FastAPI for the backend API, and integrated with OpenAI\'s language models for intelligent content analysis.',
+    features: [
+      'Real-time policy monitoring and alerts',
+      'AI-powered content analysis and summarization',
+      'Industry-specific regulatory tracking',
+      'Interactive dashboard with data visualization',
+      'Automated report generation',
+      'Multi-jurisdiction coverage'
+    ],
     // liveUrl: 'https://example.com',
   },
   {
@@ -33,6 +43,17 @@ export const projects = [
     image: NimbleDev,
     tags: ['React', 'Node.js', 'Express', 'Docker', 'Kubernetes', 'WebSockets'],
     githubUrl: 'https://github.com/aaryanpraveen16/Nimble-Dev',
+    fullDescription: 'NimbleDev is a cloud-based interactive development environment that provides developers with a seamless coding experience through real-time collaboration and instant feedback. The platform features a WebSocket-powered architecture that enables live code synchronization, collaborative editing, and immediate preview updates. Built with containerization in mind, NimbleDev ensures consistent development environments across different machines and deployment scenarios.',
+    features: [
+      'Real-time collaborative coding',
+      'Integrated terminal and CLI tools',
+      'Live file tree navigation',
+      'Instant preview and hot reloading',
+      'Docker containerization support',
+      'Kubernetes orchestration ready',
+      'Multi-language syntax highlighting',
+      'Integrated debugging tools'
+    ],
     // liveUrl: 'https://example.com',
   },
   {
@@ -42,6 +63,17 @@ export const projects = [
     image: CoinGuard,
     tags: ['React', 'Node.js', 'Solana', 'Ethereum', 'Blockchain', 'Web3'],
     githubUrl: 'https://github.com/aaryanpraveen16/CoinGuard',
+    fullDescription: 'CoinGuard is a sophisticated cryptocurrency wallet application that implements hierarchical deterministic (HD) wallet functionality for both Ethereum and Solana blockchains. The application prioritizes security through advanced cryptographic techniques while maintaining an intuitive user interface for managing digital assets. Built with modern web technologies and blockchain integration libraries, CoinGuard provides users with a secure and reliable platform for cryptocurrency transactions.',
+    features: [
+      'Hierarchical Deterministic (HD) wallet support',
+      'Multi-blockchain compatibility (Ethereum & Solana)',
+      'Secure private key management',
+      'Transaction history and tracking',
+      'Real-time balance updates',
+      'QR code generation for addresses',
+      'Backup and recovery mechanisms',
+      'Hardware wallet integration support'
+    ],
     // liveUrl: 'https://example.com',
   },
   {
@@ -50,6 +82,17 @@ export const projects = [
     description: 'Designed a health monitoring app that integrates with wearable devices to track health metrics, manage prescriptions, and ensure user-friendly navigation.',
     image: CureConnect,
     tags: ['Figma', 'UX Research', 'Prototyping', 'Information Architecture'],
+    fullDescription: 'CureConnect is a comprehensive health monitoring and management application designed to bridge the gap between patients, healthcare providers, and wearable technology. The project focused on creating an intuitive user experience that seamlessly integrates with various health monitoring devices while providing actionable insights and medication management features. The design process involved extensive user research, prototyping, and iterative testing to ensure accessibility and usability across different user demographics.',
+    features: [
+      'Wearable device integration',
+      'Real-time health metrics tracking',
+      'Prescription and medication management',
+      'Appointment scheduling and reminders',
+      'Health trend analysis and visualization',
+      'Emergency contact integration',
+      'Multi-platform responsive design',
+      'Accessibility-focused user interface'
+    ],
     // githubUrl: 'https://github.com/', (if applicable)
     // liveUrl: 'https://example.com',
   },
@@ -60,6 +103,37 @@ export const projects = [
     image: PledgePilot,
     tags: ['React.js', 'Material-UI', 'D3.js', 'Redux', 'MongoDB'],
     githubUrl: 'https://github.com/aaryanpraveen16/pledgepilot',
+    fullDescription: 'PledgePilot is an innovative crowdfunding platform specifically designed for hobbyists and creative individuals looking to bring their projects to life. The platform combines traditional crowdfunding mechanics with gamification elements and advanced data visualization to create an engaging experience for both project creators and backers. Built with a focus on user experience and data-driven insights, PledgePilot helps users make informed decisions about their investments and project support.',
+    features: [
+      'Campaign creation and management tools',
+      'Dynamic data visualization with D3.js',
+      'Gamified reward systems',
+      'Real-time funding progress tracking',
+      'Social sharing and promotion tools',
+      'Secure payment processing',
+      'Project discovery and filtering',
+      'Backer engagement features'
+    ],
+    // liveUrl: 'https://example.com',
+  },
+  {
+    id: 6,
+    title: 'Freeway Simulator',
+    description: 'A freeway traffic simulator designed to model real-time vehicle dynamics with multiple agents, focusing on congestion control and lane changing behavior.',
+    image: '/placeholder-freeway.jpg', // You'll need to add an appropriate image
+    tags: ['React', 'TypeScript', 'Python'],
+    githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator', // Update with actual URL when available
+    fullDescription: 'Freeway Simulator is a sophisticated traffic simulation tool developed as part of ongoing research at Northeastern University. The simulator models real-time vehicle dynamics with multiple agents to study and analyze traffic flow patterns, congestion control mechanisms, and lane changing behaviors. This work-in-progress tool applies probabilistic behavior models and safe-distance algorithms to create realistic traffic scenarios that help researchers understand and optimize traffic management strategies.',
+    features: [
+      'Real-time vehicle dynamics modeling',
+      'Multi-agent simulation with 100+ vehicles',
+      'Probabilistic behavior modeling',
+      'Safe-distance algorithm implementation',
+      'Congestion control analysis',
+      'Lane changing behavior studies',
+      'Traffic flow optimization research',
+      'Simulation logging and data analysis'
+    ],
     // liveUrl: 'https://example.com',
   }
 ];
@@ -121,7 +195,7 @@ export const skills = [
   { name: 'CI/CD', level: 80 },
   // { name: 'Linux', level: 85 },
 
-  // // Machine Learning / AI
+  // Machine Learning / AI
   // { name: 'OpenAI APIs', level: 78 },
   // { name: 'Hugging Face', level: 75 },
   // { name: 'Retrieval-Augmented Generation (RAGs)', level: 70 },
@@ -254,4 +328,3 @@ export const workExperience = [
     technologies: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Time Series Analysis']
   }
 ];
-
