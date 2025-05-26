@@ -120,9 +120,10 @@ export const projects = [
     id: 6,
     title: 'Freeway Simulator',
     description: 'A freeway traffic simulator designed to model real-time vehicle dynamics with multiple agents, focusing on congestion control and lane changing behavior.',
-    image: '/placeholder-freeway.jpg', // You'll need to add an appropriate image
+    image: '/lovable-uploads/f045809d-9255-4b2e-877b-f4c5dea44284.png',
     tags: ['React', 'TypeScript', 'Python'],
-    githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator', // Update with actual URL when available
+    githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator',
+    liveUrl: 'https://freeway-simulator.lovable.app/freeway-simulator',
     fullDescription: 'Freeway Simulator is a sophisticated traffic simulation tool developed as part of ongoing research at Northeastern University. The simulator models real-time vehicle dynamics with multiple agents to study and analyze traffic flow patterns, congestion control mechanisms, and lane changing behaviors. This work-in-progress tool applies probabilistic behavior models and safe-distance algorithms to create realistic traffic scenarios that help researchers understand and optimize traffic management strategies.',
     features: [
       'Real-time vehicle dynamics modeling',
@@ -134,7 +135,6 @@ export const projects = [
       'Traffic flow optimization research',
       'Simulation logging and data analysis'
     ],
-    // liveUrl: 'https://example.com',
   }
 ];
 
