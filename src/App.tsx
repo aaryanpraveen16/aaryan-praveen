@@ -9,11 +9,12 @@ import Index from "./pages/Index";
 import AllProjects from "./pages/AllProjects";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
-
+import { Analytics } from "@vercel/analytics/next"
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <Analytics />
     <ThemeProvider>
       <TooltipProvider>
         <Toaster />
