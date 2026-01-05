@@ -123,7 +123,7 @@ export const projects = [
     image: '/lovable-uploads/f045809d-9255-4b2e-877b-f4c5dea44284.png',
     tags: ['React', 'TypeScript', 'Python'],
     githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator',
-    liveUrl: 'https://freeway-simulator.lovable.app/freeway-simulator',
+    liveUrl: 'https://freeway-simulator.vercel.app/',
     fullDescription: 'Freeway Simulator is a sophisticated traffic simulation tool developed as part of ongoing research at Northeastern University. The simulator models real-time vehicle dynamics with multiple agents to study and analyze traffic flow patterns, congestion control mechanisms, and lane changing behaviors. This work-in-progress tool applies probabilistic behavior models and safe-distance algorithms to create realistic traffic scenarios that help researchers understand and optimize traffic management strategies.',
     features: [
       'Real-time vehicle dynamics modeling',
@@ -272,7 +272,7 @@ export const education = [
       'IOT'
     ],
     achievements: [
-     ' Received Government of India Copyright for Final Year Project: "A Method for Parallel Computation of Chebyshev Polynomials, Error Functions, and Scorer Functions"'
+      ' Received Government of India Copyright for Final Year Project: "A Method for Parallel Computation of Chebyshev Polynomials, Error Functions, and Scorer Functions"'
     ]
   }
 ];
