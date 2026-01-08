@@ -9,37 +9,55 @@ import { toast } from 'sonner';
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, 0.1);
-  
+
   const formRef = useRef<HTMLFormElement>(null);
   const isFormInView = useInView(formRef, 0.5);
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('Message sent successfully!', {
-        description: 'Thank you for reaching out. I\'ll get back to you soon.',
+
+    try {
+      const response = await fetch("https://formspree.io/f/mqearjry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: '', email: '', message: '' });
+
+      if (response.ok) {
+        toast.success('Message sent successfully!', {
+          description: 'Thank you for reaching out. I\'ll get back to you soon.',
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        toast.error('Something went wrong.', {
+          description: 'Please try again later or email me directly.',
+        });
+      }
+    } catch (error) {
+      toast.error('Network error.', {
+        description: 'Please check your connection and try again.',
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
-  
+
   const getSocialIcon = (name: string) => {
     switch (name.toLowerCase()) {
       case 'github':
@@ -54,8 +72,8 @@ const Contact = () => {
   };
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       ref={sectionRef}
       className="section-padding bg-secondary/30"
     >
@@ -91,7 +109,7 @@ const Contact = () => {
               I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
               Feel free to reach out using the form or through social platforms.
             </p>
-            
+
             <div className="mb-8">
               <h4 className="text-lg font-medium mb-4">Connect with me</h4>
               <div className="flex space-x-4">
@@ -109,10 +127,10 @@ const Contact = () => {
                 ))}
               </div>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-medium mb-4">Email me directly</h4>
-              <a 
+              <a
                 href="mailto:aaryan.praveen@gmail.com"
                 className="text-primary hover:underline flex items-center"
               >
@@ -122,7 +140,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <form 
+          <form
             ref={formRef}
             onSubmit={handleSubmit}
             className={cn(
@@ -145,7 +163,7 @@ const Contact = () => {
                 placeholder="Your name"
               />
             </div>
-            
+
             <div className="mb-6">
               <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
@@ -161,7 +179,7 @@ const Contact = () => {
                 placeholder="Your email address"
               />
             </div>
-            
+
             <div className="mb-6">
               <label htmlFor="message" className="block text-sm font-medium mb-2">
                 Message
@@ -177,14 +195,14 @@ const Contact = () => {
                 placeholder="Tell me about your project..."
               />
             </div>
-            
+
             <button
               type="submit"
               disabled={isSubmitting}
               className={cn(
                 "w-full px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium flex items-center justify-center transition-all",
-                isSubmitting 
-                  ? "opacity-70 cursor-not-allowed" 
+                isSubmitting
+                  ? "opacity-70 cursor-not-allowed"
                   : "hover:translate-y-[-2px] active:translate-y-[0px]"
               )}
             >

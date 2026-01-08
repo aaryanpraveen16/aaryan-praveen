@@ -81,16 +81,18 @@ const Hero = () => {
 
             <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${animationComplete ? '' : 'hidden'}`}>
               <a
-                href="#projects"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all hover:translate-y-[-2px] active:translate-y-[0px]"
               >
-                View Projects
+                View Resume
               </a>
               <a
-                href="#contact"
+                href="#projects"
                 className="px-6 py-3 rounded-lg bg-secondary/80 backdrop-blur-sm text-secondary-foreground font-medium transition-all hover:translate-y-[-2px] active:translate-y-[0px]"
               >
-                Contact Me
+                View Projects
               </a>
             </div>
           </>
