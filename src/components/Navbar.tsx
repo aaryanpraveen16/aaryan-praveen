@@ -6,11 +6,14 @@ import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
 
-const Navbar = () => {
+interface NavbarProps {
+  showLogo?: boolean;
+}
+
+const Navbar = ({ showLogo = false }: NavbarProps) => {
   const scrollY = useScrollPosition();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,20 +32,11 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call it initially
+    handleScroll();
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
-
-  // Show the logo after a delay
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLogo(true);
-    }, 3000); // Total time of typing animation + delay before minimizing
-    
-    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -52,6 +46,7 @@ const Navbar = () => {
       document.body.classList.remove("overflow-hidden");
     }
   }, [isMenuOpen]);
+
   return (
     <header
       className={cn(
@@ -63,12 +58,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between">
         <a 
+          id="navbar-logo"
           href="#home" 
           className={cn(
-            "text-xl font-medium transition-all duration-500 relative",
+            "text-xl font-medium transition-opacity duration-300 relative",
             showLogo 
-              ? "opacity-100 transform translate-y-0" 
-              : "opacity-0 transform -translate-y-4"
+              ? "opacity-100" 
+              : "opacity-0 pointer-events-none"
           )}
         >
           Aaryan

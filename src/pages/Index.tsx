@@ -8,12 +8,14 @@ import Achievements from "@/components/Achievements";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import { ChatbotWidget } from "@/components/ChatbotWidget";
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showNavbarLogo, setShowNavbarLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +32,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar showLogo={showNavbarLogo} />
       <main>
-        <Hero />
+        <Hero onAnimationArrival={() => setShowNavbarLogo(true)} />
         <About />
         <Experience />
         <Education />
@@ -53,15 +55,17 @@ const Index = () => {
       <button
         onClick={scrollToTop}
         className={cn(
-          "fixed bottom-8 right-8 p-3 rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 z-40",
+          "fixed bottom-24 right-6 p-2.5 rounded-full bg-secondary/80 backdrop-blur border border-border text-foreground hover:bg-secondary shadow-lg transition-all duration-300 z-40",
           showScrollTop 
             ? "opacity-100 translate-y-0" 
             : "opacity-0 translate-y-10 pointer-events-none"
         )}
         aria-label="Scroll to top"
       >
-        <ArrowUp className="w-5 h-5" />
+        <ArrowUp className="w-4 h-4" />
       </button>
+
+      <ChatbotWidget />
     </div>
   );
 };

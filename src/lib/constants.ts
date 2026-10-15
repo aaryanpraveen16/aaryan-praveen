@@ -7,13 +7,9 @@ import CureConnect from "../assets/cure-connect.png"
 import PledgePilot from "../assets/pledge-pilot.jpg"
 
 export const navLinks = [
-  // { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Education', href: '#education' },
-  // { name: 'Achievements', href: '#achievements' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -153,6 +149,12 @@ export const testimonials = [
     role: 'Founder and Director at Flair Labs',
     content: "As a Software Engineer, Aaryan has served Flair Labs, where I have observed him working. Prima facie, Aaryan is a diligent professional, committed to his deliverables, quality and team-causes. He is open to solving complex problems without any hesitation. He is an explorer and sees through challenges with confidence. Observing him communicate is reassuring about his confidence and knowhow. He speaks with conviction and is very respectful. Aaryan is an ambitious soul, aiming high and more importantly, has a plan. He has already firmed up as a software engineer and I see his leadership traits unfolding. I wish Aaryan the very best and am confident to see him succeeding all along his career.",
     avatar: Daljeet,
+  },
+  {
+    id: 3,
+    name: 'Sergey Aityan',
+    role: 'PhD, DSc. Professor, Northeastern University',
+    content: 'Mr. Aaryan Praveen has been my research assistant in the project on "A swarm simulation of freeway traffic" that aimed optimization of freeway traffic, increasing the road throughput and reduction of accident rate. Aaryan has done extraordinary work in designing, developing, and implementing simulation algorithms. He showed a very high level of creativity as a researcher and reliability as a team member. I strongly believe that Aayran will be an excellent asset to any company and organization.',
   },
   // {
   //   id: 3,

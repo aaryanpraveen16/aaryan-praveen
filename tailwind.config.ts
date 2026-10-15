@@ -123,8 +123,9 @@ export default {
 				"float": "float 6s ease-in-out infinite",
 			},
 			fontFamily: {
-				sans: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'monospace'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				display: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+				mono: ['JetBrains Mono', 'SF Mono', 'monospace'],
 			}
 		}
 	},

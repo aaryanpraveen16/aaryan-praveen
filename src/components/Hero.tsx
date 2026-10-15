@@ -3,23 +3,29 @@ import { ArrowDown } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import TypedName from './TypedName';
 
-const Hero = () => {
+interface HeroProps {
+  onAnimationArrival?: () => void;
+}
+
+const Hero = ({ onAnimationArrival }: HeroProps) => {
   const parallaxOffset = useParallax(0.05);
   const heroRef = useRef<HTMLElement>(null);
-  const [showName, setShowName] = useState(true);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const flyingTextRef = useRef<HTMLDivElement>(null);
+  
+  // Stages: 'typing' | 'pausing' | 'moving' | 'done'
+  const [animStage, setAnimStage] = useState<'typing' | 'pausing' | 'moving' | 'done'>('typing');
+  const [flyStyle, setFlyStyle] = useState<React.CSSProperties>({});
+  const [contentVisible, setContentVisible] = useState(false);
 
   useEffect(() => {
-    if (animationComplete) {
+    if (contentVisible) {
       const timers: NodeJS.Timeout[] = [];
-
       const elements = heroRef.current?.querySelectorAll('.animate-on-load');
       elements?.forEach((el, index) => {
         const timer = setTimeout(() => {
           el.classList.add('animate-fade-in');
           el.classList.remove('opacity-0');
         }, 100 * (index + 1));
-
         timers.push(timer);
       });
 
@@ -27,15 +33,54 @@ const Hero = () => {
         timers.forEach(timer => clearTimeout(timer));
       };
     }
-  }, [animationComplete]);
+  }, [contentVisible]);
 
   const handleTypingComplete = () => {
+    // Wait slightly so the completed typed word is clearly seen
     setTimeout(() => {
-      setShowName(false);
+      setAnimStage('moving');
+
+      const heroEl = flyingTextRef.current;
+      const targetEl = document.getElementById('navbar-logo');
+
+      if (heroEl && targetEl) {
+        const heroRect = heroEl.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
+
+        // Calculate delta translation to the target's center/top-left
+        const deltaX = targetRect.left - heroRect.left;
+        const deltaY = targetRect.top - heroRect.top;
+        
+        // Calculate scale ratio between target font size and initial font size
+        const scale = (targetRect.height && heroRect.height) 
+          ? Math.min(Math.max(targetRect.height / heroRect.height, 0.18), 0.35)
+          : 0.25;
+
+        setFlyStyle({
+          transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`,
+          transformOrigin: 'top left',
+          transition: 'transform 1000ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 800ms',
+          opacity: 0,
+        });
+      } else {
+        // Fallback calculation towards top-left
+        setFlyStyle({
+          transform: `translate3d(calc(-50vw + 4rem), calc(-50vh + 2rem), 0) scale(0.25)`,
+          transformOrigin: 'top left',
+          transition: 'transform 1000ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 800ms',
+          opacity: 0,
+        });
+      }
+
+      // When the flying text arrives at the target navbar position
       setTimeout(() => {
-        setAnimationComplete(true);
-      }, 500);
-    }, 1000);
+        setAnimStage('done');
+        if (onAnimationArrival) {
+          onAnimationArrival();
+        }
+        setContentVisible(true);
+      }, 1000);
+    }, 700);
   };
 
   return (
@@ -44,42 +89,50 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 dark:bg-primary/10 filter blur-3xl"
-          style={{ transform: `translateY(${parallaxOffset * 2}px)` }}
-        />
-        <div
-          className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-primary/5 dark:bg-primary/10 filter blur-3xl"
-          style={{ transform: `translateY(${parallaxOffset * 1.5}px)` }}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-dot-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        <div 
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-primary/[0.04] dark:bg-primary/[0.07] rounded-full blur-3xl"
+          style={{ transform: `translate(-50%, ${parallaxOffset * 1.2}px)` }}
         />
       </div>
 
       <div className="container mx-auto px-6 flex flex-col items-center text-center z-10">
-        {showName ? (
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <TypedName
-              text="Aaryan"
-              className="text-6xl md:text-8xl font-bold"
-              speed={150}
-              onComplete={handleTypingComplete}
-            />
+        {animStage !== 'done' && (
+          <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-50">
+            <div
+              ref={flyingTextRef}
+              style={flyStyle}
+              className="inline-block will-change-transform"
+            >
+              <TypedName
+                text="Aaryan"
+                className="text-6xl md:text-8xl font-bold font-display"
+                speed={150}
+                onComplete={handleTypingComplete}
+              />
+            </div>
           </div>
-        ) : (
+        )}
+
+        {(animStage === 'moving' || animStage === 'done') && (
           <>
-            <span className={`animate-on-load opacity-0 inline-block px-4 py-1.5 mb-6 text-sm rounded-full bg-secondary/80 text-secondary-foreground backdrop-blur-sm ${animationComplete ? '' : 'hidden'}`}>
-              Software Engineer
-            </span>
-            <h1 className={`animate-on-load opacity-0 text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 ${animationComplete ? '' : 'hidden'}`}>
-              Building things, breaking things, then <span className="relative inline-block">fixing them better<span className="absolute bottom-0 left-0 right-0 h-3 bg-primary/10 -z-10 translate-y-2"></span></span>
+            <div className={`animate-on-load opacity-0 inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-border/80 bg-background/60 backdrop-blur-sm text-xs font-mono text-muted-foreground ${contentVisible ? '' : 'hidden'}`}>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Mumbai</span>
+              <span className="text-border">/</span>
+              <span>Northeastern grad</span>
+            </div>
+
+            <h1 className={`animate-on-load opacity-0 font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-3xl text-foreground ${contentVisible ? '' : 'hidden'}`}>
+              Hey, I’m Aaryan. I build software.
             </h1>
 
-            <p className={`animate-on-load opacity-0 text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl ${animationComplete ? '' : 'hidden'}`}>
-              {/* Full-stack engineer who works with TypeScript, cloud platforms, and whatever tech stack the problem needs.  */}
-              I've shipped features, patched vulnerabilities, and learned that "it works on my machine" is never the end of the story.
+            <p className={`animate-on-load opacity-0 text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-xl font-normal leading-relaxed ${contentVisible ? '' : 'hidden'}`}>
+              Lately I’ve been making a traffic simulator and tinkering with RAG search and voice agents.
             </p>
 
-            <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${animationComplete ? '' : 'hidden'}`}>
+            <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${contentVisible ? '' : 'hidden'}`}>
               <a
                 href="/resume.pdf"
                 target="_blank"
@@ -101,7 +154,7 @@ const Hero = () => {
 
       <a
         href="#about"
-        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors ${animationComplete ? '' : 'hidden'}`}
+        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors ${contentVisible ? '' : 'hidden'}`}
       >
         <ArrowDown className="w-5 h-5 animate-bounce" />
       </a>

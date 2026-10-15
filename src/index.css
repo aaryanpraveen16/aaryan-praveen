@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -63,6 +63,56 @@
 
   html {
     @apply scroll-smooth;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 1;
+    will-change: transform, opacity;
+    transition: opacity 150ms ease, border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: hsl(var(--primary));
+  }
+
+  .cursor-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid hsl(var(--primary) / 0.45);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.08);
+    z-index: 9998;
+  }
+
+  .cursor-hidden {
+    opacity: 0;
+  }
+
+  .cursor-ring.cursor-hover {
+    border-color: hsl(var(--primary) / 0.75);
+    box-shadow: 0 0 14px hsl(var(--primary) / 0.2);
+  }
+
+  .cursor-dot.cursor-hover {
+    background-color: hsl(var(--primary) / 0.8);
+  }
+
+  .cursor-ring.cursor-active {
+    border-color: hsl(var(--primary) / 0.9);
+  }
+
+  .cursor-dot.cursor-active {
+    background-color: hsl(var(--primary) / 0.9);
   }
   
   /* Custom scrollbar styling */
@@ -155,5 +205,13 @@
   
   .animate-delay-500 {
     animation-delay: 500ms;
+  }
+}
+
+
+@layer utilities {
+  .bg-dot-grid {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }

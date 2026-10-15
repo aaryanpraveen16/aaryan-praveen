@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import MouseEffect from "./components/MouseEffect";
 import Index from "./pages/Index";
 import AllProjects from "./pages/AllProjects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -19,6 +20,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <MouseEffect />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
