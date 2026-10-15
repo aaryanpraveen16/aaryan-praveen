@@ -15,7 +15,10 @@ import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [showNavbarLogo, setShowNavbarLogo] = useState(false);
+  const [hasSeenIntro, setHasSeenIntro] = useState(() => {
+    return typeof window !== 'undefined' && sessionStorage.getItem('has_seen_intro') === 'true';
+  });
+  const [showNavbarLogo, setShowNavbarLogo] = useState(hasSeenIntro);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,11 +33,20 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleAnimationComplete = () => {
+    sessionStorage.setItem('has_seen_intro', 'true');
+    setHasSeenIntro(true);
+    setShowNavbarLogo(true);
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar showLogo={showNavbarLogo} />
       <main>
-        <Hero onAnimationArrival={() => setShowNavbarLogo(true)} />
+        <Hero 
+          skipIntro={hasSeenIntro} 
+          onAnimationArrival={handleAnimationComplete} 
+        />
         <About />
         <Experience />
         <Education />

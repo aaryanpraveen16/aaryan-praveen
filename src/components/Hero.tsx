@@ -1,21 +1,24 @@
 import { useParallax } from '@/lib/animations';
 import { ArrowDown } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
-import TypedName from './TypedName';
+import ScrambleText from './ScrambleText';
 
 interface HeroProps {
   onAnimationArrival?: () => void;
+  skipIntro?: boolean;
 }
 
-const Hero = ({ onAnimationArrival }: HeroProps) => {
+const Hero = ({ onAnimationArrival, skipIntro = false }: HeroProps) => {
   const parallaxOffset = useParallax(0.05);
   const heroRef = useRef<HTMLElement>(null);
   const flyingTextRef = useRef<HTMLDivElement>(null);
   
-  // Stages: 'typing' | 'pausing' | 'moving' | 'done'
-  const [animStage, setAnimStage] = useState<'typing' | 'pausing' | 'moving' | 'done'>('typing');
+  // Stages: 'scrambling' | 'moving' | 'done'
+  const [animStage, setAnimStage] = useState<'scrambling' | 'moving' | 'done'>(
+    skipIntro ? 'done' : 'scrambling'
+  );
   const [flyStyle, setFlyStyle] = useState<React.CSSProperties>({});
-  const [contentVisible, setContentVisible] = useState(false);
+  const [contentVisible, setContentVisible] = useState(skipIntro);
 
   useEffect(() => {
     if (contentVisible) {
@@ -35,8 +38,8 @@ const Hero = ({ onAnimationArrival }: HeroProps) => {
     }
   }, [contentVisible]);
 
-  const handleTypingComplete = () => {
-    // Wait slightly so the completed typed word is clearly seen
+  const handleScrambleComplete = () => {
+    // Brief pause after decoding before gliding into position
     setTimeout(() => {
       setAnimStage('moving');
 
@@ -59,7 +62,7 @@ const Hero = ({ onAnimationArrival }: HeroProps) => {
         setFlyStyle({
           transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`,
           transformOrigin: 'top left',
-          transition: 'transform 1000ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 800ms',
+          transition: 'transform 950ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 750ms',
           opacity: 0,
         });
       } else {
@@ -67,20 +70,20 @@ const Hero = ({ onAnimationArrival }: HeroProps) => {
         setFlyStyle({
           transform: `translate3d(calc(-50vw + 4rem), calc(-50vh + 2rem), 0) scale(0.25)`,
           transformOrigin: 'top left',
-          transition: 'transform 1000ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 800ms',
+          transition: 'transform 950ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease 750ms',
           opacity: 0,
         });
       }
 
-      // When the flying text arrives at the target navbar position
+      // When the decoded text arrives at the navbar logo position
       setTimeout(() => {
         setAnimStage('done');
         if (onAnimationArrival) {
           onAnimationArrival();
         }
         setContentVisible(true);
-      }, 1000);
-    }, 700);
+      }, 950);
+    }, 450);
   };
 
   return (
@@ -105,11 +108,12 @@ const Hero = ({ onAnimationArrival }: HeroProps) => {
               style={flyStyle}
               className="inline-block will-change-transform"
             >
-              <TypedName
+              <ScrambleText
                 text="Aaryan"
                 className="text-6xl md:text-8xl font-bold font-display"
-                speed={150}
-                onComplete={handleTypingComplete}
+                duration={1100}
+                delay={200}
+                onComplete={handleScrambleComplete}
               />
             </div>
           </div>

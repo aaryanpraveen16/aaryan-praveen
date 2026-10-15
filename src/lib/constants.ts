@@ -5,6 +5,7 @@ import Daljeet from "../assets/Daljeet.jpeg"
 import Nirmal from "../assets/Nirmal.jpeg"
 import CureConnect from "../assets/cure-connect.png"
 import PledgePilot from "../assets/pledge-pilot.jpg"
+import FreewaySimulator from "../assets/freeway-simulator.png"
 
 export const navLinks = [
   { name: 'Projects', href: '#projects' },
@@ -116,7 +117,7 @@ export const projects = [
     id: 6,
     title: 'Freeway Simulator',
     description: 'A freeway traffic simulator designed to model real-time vehicle dynamics with multiple agents, focusing on congestion control and lane changing behavior.',
-    image: '/lovable-uploads/f045809d-9255-4b2e-877b-f4c5dea44284.png',
+    image: FreewaySimulator,
     tags: ['React', 'TypeScript', 'Python'],
     githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator',
     liveUrl: 'https://freeway-simulator.vercel.app/',
