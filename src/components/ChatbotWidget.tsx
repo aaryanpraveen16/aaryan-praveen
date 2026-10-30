@@ -8,10 +8,12 @@ import {
   Cpu, 
   RotateCcw, 
   ChevronDown, 
-  AlertCircle 
+  AlertCircle,
+  CheckCircle2
 } from 'lucide-react';
 import { useWebLLM } from '@/hooks/useWebLLM';
 import { cn } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
 
 const SUGGESTED_PROMPTS = [
   "What are Aaryan's top projects?",
@@ -35,7 +37,6 @@ export const ChatbotWidget: React.FC = () => {
     messages,
     isGenerating,
     error,
-    loadModel,
     sendMessage,
     resetChat,
   } = useWebLLM();
@@ -47,10 +48,11 @@ export const ChatbotWidget: React.FC = () => {
   }, [messages, isOpen]);
 
   useEffect(() => {
-    if (isOpen && isModelReady) {
-      inputRef.current?.focus();
+    if (isOpen) {
+      // Gentle auto-focus so user can type immediately
+      setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen, isModelReady]);
+  }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,13 +63,7 @@ export const ChatbotWidget: React.FC = () => {
   };
 
   const handleSuggestedClick = (prompt: string) => {
-    if (!isModelReady) {
-      loadModel().then(() => {
-        sendMessage(prompt);
-      });
-    } else {
-      sendMessage(prompt);
-    }
+    sendMessage(prompt);
   };
 
   return (
@@ -85,22 +81,30 @@ export const ChatbotWidget: React.FC = () => {
                 </div>
                 <span className={cn(
                   "absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-background",
-                  isModelReady ? "bg-emerald-500" : isLoadingModel ? "bg-amber-500 animate-pulse" : "bg-muted-foreground/40"
+                  isModelReady 
+                    ? "bg-emerald-500" 
+                    : isLoadingModel 
+                    ? "bg-amber-500 animate-pulse" 
+                    : isWebGPUSupported === false 
+                    ? "bg-rose-500" 
+                    : "bg-muted-foreground/40"
                 )} />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-semibold text-sm">Aaryan's AI</span>
                   <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
-                    WebLLM
+                    WebLLM Worker
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {isModelReady 
-                    ? "In-browser local WebGPU" 
+                    ? "Ready · Local in-browser WebGPU" 
                     : isLoadingModel 
-                    ? "Loading local model..." 
-                    : "100% private & client-side"}
+                    ? `Downloading in background (${modelProgress}%)...` 
+                    : isWebGPUSupported === false
+                    ? "WebGPU not supported on device"
+                    : "Initializing background worker..."}
                 </p>
               </div>
             </div>
@@ -126,40 +130,32 @@ export const ChatbotWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* Model Init Banner if not loaded */}
-          {!isModelReady && (
-            <div className="p-4 border-b border-border bg-card/60 backdrop-blur-sm">
+          {/* Background Download Banner (shown only while downloading in background) */}
+          {!isModelReady && isLoadingModel && (
+            <div className="p-3.5 border-b border-border bg-card/60 backdrop-blur-sm animate-in fade-in duration-300">
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0 mt-0.5">
-                  <Cpu className="w-4 h-4" />
+                  <Cpu className="w-4 h-4 animate-pulse" />
                 </div>
                 <div className="flex-1 text-xs space-y-1.5">
-                  <p className="font-medium text-foreground">Run AI locally with WebGPU</p>
-                  <p className="text-muted-foreground">
-                    This chatbot runs entirely in your browser using WebLLM — zero API keys, no server calls, 100% private.
+                  <div className="flex items-center justify-between">
+                    <p className="font-medium text-foreground">Downloading model in background</p>
+                    <span className="font-mono text-[11px] text-primary font-semibold">{modelProgress}%</span>
+                  </div>
+                  <p className="text-muted-foreground text-[11px]">
+                    Runs on a background Web Worker with WebGPU. Cached permanently for instant repeat visits. You can type now!
                   </p>
 
-                  {isLoadingModel ? (
-                    <div className="space-y-2 pt-2">
-                      <div className="flex justify-between text-[11px] text-muted-foreground font-mono">
-                        <span className="truncate max-w-[200px]">{progressText || 'Initializing...'}</span>
-                        <span>{modelProgress}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-primary transition-all duration-300"
-                          style={{ width: `${Math.max(modelProgress, 5)}%` }}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={loadModel}
-                      className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition active:scale-95 shadow-sm"
-                    >
-                      <Sparkles className="w-3.5 h-3.5" />
-                      Initialize Model (~300MB)
-                    </button>
+                  <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mt-1.5">
+                    <div 
+                      className="h-full bg-primary transition-all duration-300"
+                      style={{ width: `${Math.max(modelProgress, 6)}%` }}
+                    />
+                  </div>
+                  {progressText && (
+                    <p className="text-[10px] font-mono text-muted-foreground truncate max-w-[280px]">
+                      {progressText}
+                    </p>
                   )}
                 </div>
               </div>
@@ -204,7 +200,13 @@ export const ChatbotWidget: React.FC = () => {
                     )}
                   >
                     {msg.content ? (
-                      <p className="whitespace-pre-wrap">{msg.content}</p>
+                      isAssistant ? (
+                        <div className="prose prose-xs sm:prose-sm dark:prose-invert max-w-none text-foreground leading-relaxed [&>p]:my-1.5 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 [&>ul]:my-1.5 [&>ul]:pl-4 [&>ul]:list-disc [&>ol]:my-1.5 [&>ol]:pl-4 [&>ol]:list-decimal [&>li]:my-0.5 [&_strong]:font-semibold [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
+                      ) : (
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      )
                     ) : (
                       <span className="flex items-center gap-1.5 text-muted-foreground italic text-xs py-1">
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -219,9 +221,12 @@ export const ChatbotWidget: React.FC = () => {
           </div>
 
           {/* Suggested prompts when chat is fresh */}
-          {messages.length === 1 && !isLoadingModel && (
+          {messages.length === 1 && (
             <div className="p-3 border-t border-border/40 bg-secondary/20">
-              <p className="text-[11px] text-muted-foreground font-medium mb-1.5">Suggested questions:</p>
+              <p className="text-[11px] text-muted-foreground font-medium mb-1.5 flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-primary" />
+                Suggested questions:
+              </p>
               <div className="flex flex-wrap gap-1.5">
                 {SUGGESTED_PROMPTS.map((prompt) => (
                   <button
@@ -247,18 +252,20 @@ export const ChatbotWidget: React.FC = () => {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder={
-                !isModelReady 
-                  ? "Initialize model to ask questions..." 
-                  : isGenerating 
+                isGenerating 
                   ? "AI is generating..." 
+                  : isWebGPUSupported === false
+                  ? "WebGPU not supported on this browser"
+                  : isLoadingModel 
+                  ? "Downloading in background... you can type now!" 
                   : "Ask about Aaryan's projects, experience..."
               }
-              disabled={!isModelReady || isGenerating}
+              disabled={isGenerating || isWebGPUSupported === false}
               className="flex-1 bg-background px-3 py-2 text-xs sm:text-sm rounded-xl border border-input focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
             />
             <button
               type="submit"
-              disabled={!isModelReady || isGenerating || !inputText.trim()}
+              disabled={isGenerating || isWebGPUSupported === false || !inputText.trim()}
               className="p-2 rounded-xl bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-40 transition active:scale-95 shrink-0"
               aria-label="Send message"
             >
@@ -291,8 +298,14 @@ export const ChatbotWidget: React.FC = () => {
             <Bot className="w-5 h-5 group-hover:rotate-12 transition-transform" />
             <span className="text-xs font-medium">Chat with AI</span>
             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className={cn(
+                "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+                isModelReady ? "bg-emerald-400" : "bg-amber-400"
+              )}></span>
+              <span className={cn(
+                "relative inline-flex rounded-full h-2 w-2",
+                isModelReady ? "bg-emerald-500" : "bg-amber-500"
+              )}></span>
             </span>
           </>
         )}
