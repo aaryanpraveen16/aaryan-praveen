@@ -1,6 +1,11 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import * as webllm from '@mlc-ai/web-llm';
-import { AARYAN_PORTFOLIO_CONTEXT, DEFAULT_MODEL_ID } from '@/lib/webllmConfig';
+import { 
+  AARYAN_PORTFOLIO_CONTEXT, 
+  DESKTOP_MODEL_ID, 
+  MOBILE_FALLBACK_MODEL_ID,
+  isMobileDevice 
+} from '@/lib/webllmConfig';
 
 export interface ChatMessage {
   id: string;
@@ -14,6 +19,8 @@ export interface UseWebLLMReturn {
   modelProgress: number; // 0 to 100
   progressText: string;
   isModelReady: boolean;
+  activeModelId: string | null;
+  isMobile: boolean;
   messages: ChatMessage[];
   isGenerating: boolean;
   error: string | null;
@@ -32,6 +39,8 @@ let globalIsModelReady = false;
 let globalModelProgress = 0;
 let globalProgressText = '';
 let globalError: string | null = null;
+let globalActiveModelId: string | null = null;
+let globalIsMobile = false;
 
 const listeners = new Set<() => void>();
 
@@ -69,7 +78,9 @@ async function checkWebGPU(): Promise<boolean> {
 
 /**
  * Initiates model download and engine initialization inside a dedicated Web Worker
- * silently in the background.
+ * silently in the background. On mobile or memory-constrained devices, automatically
+ * selects the ultra-compact fallback model (SmolLM2-360M) to conserve memory.
+ * If desktop model loading ever fails, it automatically falls back to SmolLM2.
  */
 export function initBackgroundModel(): Promise<webllm.WebWorkerMLCEngine | null> {
   if (globalIsModelReady && globalEngine) {
@@ -85,13 +96,19 @@ export function initBackgroundModel(): Promise<webllm.WebWorkerMLCEngine | null>
     notifyListeners();
 
     if (!supported) {
-      globalError = 'WebGPU is not supported on this browser/device. Please try on modern desktop Chrome or Edge.';
+      globalError = 'WebGPU is not supported on this browser/device. Please try on modern desktop Chrome, Edge, or mobile browsers with WebGPU enabled.';
       notifyListeners();
       return null;
     }
 
     try {
-      globalProgressText = 'Starting Web Worker...';
+      const isMobile = isMobileDevice();
+      globalIsMobile = isMobile;
+      const targetModel = isMobile ? MOBILE_FALLBACK_MODEL_ID : DESKTOP_MODEL_ID;
+
+      globalProgressText = isMobile 
+        ? 'Starting mobile Web Worker (SmolLM2)...' 
+        : 'Starting Web Worker...';
       notifyListeners();
 
       if (!globalWorker) {
@@ -108,9 +125,29 @@ export function initBackgroundModel(): Promise<webllm.WebWorkerMLCEngine | null>
         notifyListeners();
       };
 
-      const engine = await webllm.CreateWebWorkerMLCEngine(globalWorker, DEFAULT_MODEL_ID, {
-        initProgressCallback,
-      });
+      let engine: webllm.WebWorkerMLCEngine;
+
+      try {
+        engine = await webllm.CreateWebWorkerMLCEngine(globalWorker, targetModel, {
+          initProgressCallback,
+        });
+        globalActiveModelId = targetModel;
+      } catch (initialErr: any) {
+        // If desktop model fails (out of VRAM, shader compiler issue, etc.), automatically fall back to lightweight mobile model
+        if (targetModel !== MOBILE_FALLBACK_MODEL_ID) {
+          console.warn(`Primary model (${targetModel}) failed to initialize. Falling back to lightweight model (${MOBILE_FALLBACK_MODEL_ID})...`, initialErr);
+          globalProgressText = 'Falling back to ultra-compact model (SmolLM2)...';
+          globalModelProgress = 0;
+          notifyListeners();
+
+          engine = await webllm.CreateWebWorkerMLCEngine(globalWorker, MOBILE_FALLBACK_MODEL_ID, {
+            initProgressCallback,
+          });
+          globalActiveModelId = MOBILE_FALLBACK_MODEL_ID;
+        } else {
+          throw initialErr;
+        }
+      }
 
       globalEngine = engine;
       globalIsModelReady = true;
@@ -139,6 +176,8 @@ export function useWebLLM(): UseWebLLMReturn {
   const [modelProgress, setModelProgress] = useState<number>(globalModelProgress);
   const [progressText, setProgressText] = useState<string>(globalProgressText);
   const [isModelReady, setIsModelReady] = useState<boolean>(globalIsModelReady);
+  const [activeModelId, setActiveModelId] = useState<string | null>(globalActiveModelId);
+  const [isMobile, setIsMobile] = useState<boolean>(globalIsMobile || (typeof window !== 'undefined' ? isMobileDevice() : false));
   const [error, setError] = useState<string | null>(globalError);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
@@ -158,6 +197,8 @@ export function useWebLLM(): UseWebLLMReturn {
       setModelProgress(globalModelProgress);
       setProgressText(globalProgressText);
       setError(globalError);
+      setActiveModelId(globalActiveModelId);
+      setIsMobile(globalIsMobile || isMobileDevice());
       setIsLoadingModel(!globalIsModelReady && (!!globalLoadingPromise || globalModelProgress > 0));
     };
 
@@ -309,6 +350,8 @@ export function useWebLLM(): UseWebLLMReturn {
     modelProgress,
     progressText,
     isModelReady,
+    activeModelId,
+    isMobile,
     messages,
     isGenerating,
     error,

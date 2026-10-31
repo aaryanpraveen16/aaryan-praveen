@@ -12,6 +12,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useWebLLM } from '@/hooks/useWebLLM';
+import { getModelDisplayName, MOBILE_FALLBACK_MODEL_ID } from '@/lib/webllmConfig';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 
@@ -34,6 +35,8 @@ export const ChatbotWidget: React.FC = () => {
     modelProgress,
     progressText,
     isModelReady,
+    activeModelId,
+    isMobile,
     messages,
     isGenerating,
     error,
@@ -94,14 +97,18 @@ export const ChatbotWidget: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   <span className="font-semibold text-sm">Aaryan's AI</span>
                   <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
-                    WebLLM Worker
+                    {isModelReady && activeModelId 
+                      ? getModelDisplayName(activeModelId) 
+                      : isMobile 
+                      ? "Mobile Model" 
+                      : "WebLLM Worker"}
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {isModelReady 
-                    ? "Ready · Local in-browser WebGPU" 
+                    ? `Ready · ${activeModelId === MOBILE_FALLBACK_MODEL_ID || isMobile ? "Lightweight Mobile Model (360M)" : "Local WebGPU"}` 
                     : isLoadingModel 
-                    ? `Downloading in background (${modelProgress}%)...` 
+                    ? `Downloading ${isMobile ? "mobile " : ""}model in background (${modelProgress}%)...` 
                     : isWebGPUSupported === false
                     ? "WebGPU not supported on device"
                     : "Initializing background worker..."}
@@ -139,11 +146,15 @@ export const ChatbotWidget: React.FC = () => {
                 </div>
                 <div className="flex-1 text-xs space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium text-foreground">Downloading model in background</p>
+                    <p className="font-medium text-foreground">
+                      {isMobile ? "Downloading mobile model" : "Downloading model in background"}
+                    </p>
                     <span className="font-mono text-[11px] text-primary font-semibold">{modelProgress}%</span>
                   </div>
                   <p className="text-muted-foreground text-[11px]">
-                    Runs on a background Web Worker with WebGPU. Cached permanently for instant repeat visits. You can type now!
+                    {isMobile || activeModelId === MOBILE_FALLBACK_MODEL_ID
+                      ? "Running ultra-compact SmolLM2 (360M) optimized for mobile GPUs and low memory. Cached permanently for repeat visits!"
+                      : "Runs on a background Web Worker with WebGPU. Cached permanently for instant repeat visits. You can type now!"}
                   </p>
 
                   <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mt-1.5">

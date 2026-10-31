@@ -22,6 +22,35 @@ EDUCATION:
 - **BS in Electronics Engineering**, University of Mumbai (2017 - 2021, GPA 3.2/4.0)
 `.trim();
 
-// Recommended fast model
-export const DEFAULT_MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
-export const FALLBACK_MODEL_ID = "SmolLM2-360M-Instruct-q4f16_1-MLC";
+// Recommended desktop model (~945MB VRAM, highly articulate)
+export const DESKTOP_MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+
+// Ultra-lightweight fallback model for mobile devices & low-memory environments (~376MB VRAM, ~130MB download)
+export const MOBILE_FALLBACK_MODEL_ID = "SmolLM2-360M-Instruct-q4f16_1-MLC";
+
+// Aliases for compatibility
+export const DEFAULT_MODEL_ID = DESKTOP_MODEL_ID;
+export const FALLBACK_MODEL_ID = MOBILE_FALLBACK_MODEL_ID;
+
+/**
+ * Checks if the current client is a mobile device or resource-constrained environment
+ */
+export function isMobileDevice(): boolean {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  const isTouchScreen = 'maxTouchPoints' in navigator && (navigator as any).maxTouchPoints > 1;
+  const isSmallScreen = window.innerWidth <= 768;
+  const isLowMemory = !!((navigator as any).deviceMemory && (navigator as any).deviceMemory <= 4);
+  return isMobileUA || (isTouchScreen && isSmallScreen) || isLowMemory;
+}
+
+/**
+ * Returns a clean, user-friendly name for a WebLLM model ID
+ */
+export function getModelDisplayName(modelId: string | null): string {
+  if (!modelId) return "WebLLM";
+  if (modelId.includes("SmolLM2-360M")) return "SmolLM2 360M (Mobile)";
+  if (modelId.includes("Qwen2.5-0.5B")) return "Qwen 2.5 0.5B";
+  return modelId.split("-")[0] || "WebLLM";
+}
