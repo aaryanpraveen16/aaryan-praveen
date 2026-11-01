@@ -15,7 +15,7 @@ PROJECTS:
 - **NimbleDev**: WebSocket-powered interactive IDE with CLI and live code execution preview.
 - **CoinGuard**: Automated crypto smart-contract security vulnerability analysis.
 - **Freeway Simulator**: Swarm freeway traffic flow simulation (IDM & MOBIL algorithms).
-- **PledgePilot & CureConnect**: Full-stack platforms for non-profit fundraising and healthcare management.
+- **PledgePilot & CureConnect**: Full-stack platforms for non-profit fundraising (Live: https://pledgepilot-olg9.onrender.com) and healthcare management.
 
 EDUCATION:
 - **MS in Software Engineering**, Northeastern University (2023 - 2025, GPA 3.6/4.0)
@@ -50,6 +50,7 @@ export function isMobileDevice(): boolean {
  */
 export function getModelDisplayName(modelId: string | null): string {
   if (!modelId) return "WebLLM";
+  if (modelId === "lightweight-guide") return "Instant Guide";
   if (modelId.includes("SmolLM2-360M")) return "SmolLM2 360M (Mobile)";
   if (modelId.includes("Qwen2.5-0.5B")) return "Qwen 2.5 0.5B";
   return modelId.split("-")[0] || "WebLLM";

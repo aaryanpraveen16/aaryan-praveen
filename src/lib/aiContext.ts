@@ -68,6 +68,7 @@ FEATURED PROJECTS:
    - Tech: Figma, UX Research, Interactive Prototyping.
 7. PledgePilot
    - Full-stack crowdfunding platform with dynamic D3.js analytics visualizations and gamified creator rewards.
+   - Live URL: https://pledgepilot-olg9.onrender.com
    - Tech: React.js, Redux, Material-UI, D3.js, MongoDB.
 
 ---

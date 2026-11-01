@@ -23,9 +23,18 @@ const SUGGESTED_PROMPTS = [
   "How can I contact Aaryan?"
 ];
 
-export const ChatbotWidget: React.FC = () => {
+export interface ChatbotWidgetProps {
+  /**
+   * If true, the widget will cleanly hide itself if WebGPU is unsupported,
+   * instead of running the lightweight instant fallback guide.
+   */
+  hideWhenUnsupported?: boolean;
+}
+
+export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ hideWhenUnsupported = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
+  const [isDismissed, setIsDismissed] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -37,6 +46,7 @@ export const ChatbotWidget: React.FC = () => {
     isModelReady,
     activeModelId,
     isMobile,
+    isFallbackMode,
     messages,
     isGenerating,
     error,
@@ -57,6 +67,11 @@ export const ChatbotWidget: React.FC = () => {
     }
   }, [isOpen]);
 
+  // If user requested to hide when unsupported, or user explicitly dismissed
+  if (isDismissed || (hideWhenUnsupported && isWebGPUSupported === false)) {
+    return null;
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim() || isGenerating) return;
@@ -68,6 +83,8 @@ export const ChatbotWidget: React.FC = () => {
   const handleSuggestedClick = (prompt: string) => {
     sendMessage(prompt);
   };
+
+  const isReady = isModelReady || isFallbackMode;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -84,12 +101,10 @@ export const ChatbotWidget: React.FC = () => {
                 </div>
                 <span className={cn(
                   "absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-background",
-                  isModelReady 
+                  isReady 
                     ? "bg-emerald-500" 
                     : isLoadingModel 
                     ? "bg-amber-500 animate-pulse" 
-                    : isWebGPUSupported === false 
-                    ? "bg-rose-500" 
                     : "bg-muted-foreground/40"
                 )} />
               </div>
@@ -97,7 +112,9 @@ export const ChatbotWidget: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   <span className="font-semibold text-sm">Aaryan's AI</span>
                   <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
-                    {isModelReady && activeModelId 
+                    {isFallbackMode
+                      ? "Instant Guide"
+                      : isModelReady && activeModelId 
                       ? getModelDisplayName(activeModelId) 
                       : isMobile 
                       ? "Mobile Model" 
@@ -105,13 +122,13 @@ export const ChatbotWidget: React.FC = () => {
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {isModelReady 
+                  {isFallbackMode
+                    ? "Ready · Instant portfolio guide (No WebGPU required)"
+                    : isModelReady 
                     ? `Ready · ${activeModelId === MOBILE_FALLBACK_MODEL_ID || isMobile ? "Lightweight Mobile Model (360M)" : "Local WebGPU"}` 
                     : isLoadingModel 
                     ? `Downloading ${isMobile ? "mobile " : ""}model in background (${modelProgress}%)...` 
-                    : isWebGPUSupported === false
-                    ? "WebGPU not supported on device"
-                    : "Initializing background worker..."}
+                    : "Initializing assistant..."}
                 </p>
               </div>
             </div>
@@ -137,8 +154,8 @@ export const ChatbotWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* Background Download Banner (shown only while downloading in background) */}
-          {!isModelReady && isLoadingModel && (
+          {/* Background Download Banner (shown only when full model is downloading and NOT in fallback mode) */}
+          {!isFallbackMode && !isModelReady && isLoadingModel && (
             <div className="p-3.5 border-b border-border bg-card/60 backdrop-blur-sm animate-in fade-in duration-300">
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0 mt-0.5">
@@ -173,7 +190,7 @@ export const ChatbotWidget: React.FC = () => {
             </div>
           )}
 
-          {/* Error Message Alert */}
+          {/* Error Message Alert (only if an explicit runtime error occurred) */}
           {error && (
             <div className="m-3 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-start gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
@@ -265,18 +282,16 @@ export const ChatbotWidget: React.FC = () => {
               placeholder={
                 isGenerating 
                   ? "AI is generating..." 
-                  : isWebGPUSupported === false
-                  ? "WebGPU not supported on this browser"
-                  : isLoadingModel 
+                  : isLoadingModel && !isFallbackMode
                   ? "Downloading in background... you can type now!" 
                   : "Ask about Aaryan's projects, experience..."
               }
-              disabled={isGenerating || isWebGPUSupported === false}
+              disabled={isGenerating}
               className="flex-1 bg-background px-3 py-2 text-xs sm:text-sm rounded-xl border border-input focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
             />
             <button
               type="submit"
-              disabled={isGenerating || isWebGPUSupported === false || !inputText.trim()}
+              disabled={isGenerating || !inputText.trim()}
               className="p-2 rounded-xl bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-40 transition active:scale-95 shrink-0"
               aria-label="Send message"
             >
@@ -311,11 +326,11 @@ export const ChatbotWidget: React.FC = () => {
             <span className="flex h-2 w-2 relative">
               <span className={cn(
                 "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
-                isModelReady ? "bg-emerald-400" : "bg-amber-400"
+                isReady ? "bg-emerald-400" : "bg-amber-400"
               )}></span>
               <span className={cn(
                 "relative inline-flex rounded-full h-2 w-2",
-                isModelReady ? "bg-emerald-500" : "bg-amber-500"
+                isReady ? "bg-emerald-500" : "bg-amber-500"
               )}></span>
             </span>
           </>

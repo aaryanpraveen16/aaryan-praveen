@@ -6,6 +6,7 @@ import {
   MOBILE_FALLBACK_MODEL_ID,
   isMobileDevice 
 } from '@/lib/webllmConfig';
+import { streamFallbackResponse } from '@/lib/fallbackAssistant';
 
 export interface ChatMessage {
   id: string;
@@ -21,6 +22,7 @@ export interface UseWebLLMReturn {
   isModelReady: boolean;
   activeModelId: string | null;
   isMobile: boolean;
+  isFallbackMode: boolean;
   messages: ChatMessage[];
   isGenerating: boolean;
   error: string | null;
@@ -41,6 +43,7 @@ let globalProgressText = '';
 let globalError: string | null = null;
 let globalActiveModelId: string | null = null;
 let globalIsMobile = false;
+let globalIsFallbackMode = false;
 
 const listeners = new Set<() => void>();
 
@@ -96,7 +99,13 @@ export function initBackgroundModel(): Promise<webllm.WebWorkerMLCEngine | null>
     notifyListeners();
 
     if (!supported) {
-      globalError = 'WebGPU is not supported on this browser/device. Please try on modern desktop Chrome, Edge, or mobile browsers with WebGPU enabled.';
+      // Graceful fallback: do NOT set an ugly error string or fail
+      globalIsFallbackMode = true;
+      globalIsModelReady = true;
+      globalModelProgress = 100;
+      globalProgressText = 'Lightweight Guide Ready';
+      globalActiveModelId = 'lightweight-guide';
+      globalError = null;
       notifyListeners();
       return null;
     }
@@ -157,9 +166,14 @@ export function initBackgroundModel(): Promise<webllm.WebWorkerMLCEngine | null>
       notifyListeners();
       return engine;
     } catch (err: any) {
-      console.error('Background WebLLM init error:', err);
-      globalError = err?.message || 'Failed to initialize the in-browser model.';
-      globalIsModelReady = false;
+      console.warn('Background WebLLM init issue, switching seamlessly to lightweight guide:', err);
+      // Switch gracefully to fallback mode instead of showing a blocking error
+      globalIsFallbackMode = true;
+      globalIsModelReady = true;
+      globalModelProgress = 100;
+      globalProgressText = 'Lightweight Guide Ready';
+      globalActiveModelId = 'lightweight-guide';
+      globalError = null;
       notifyListeners();
       return null;
     } finally {
@@ -178,6 +192,7 @@ export function useWebLLM(): UseWebLLMReturn {
   const [isModelReady, setIsModelReady] = useState<boolean>(globalIsModelReady);
   const [activeModelId, setActiveModelId] = useState<string | null>(globalActiveModelId);
   const [isMobile, setIsMobile] = useState<boolean>(globalIsMobile || (typeof window !== 'undefined' ? isMobileDevice() : false));
+  const [isFallbackMode, setIsFallbackMode] = useState<boolean>(globalIsFallbackMode || globalWebGPUSupported === false);
   const [error, setError] = useState<string | null>(globalError);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
@@ -193,6 +208,7 @@ export function useWebLLM(): UseWebLLMReturn {
   useEffect(() => {
     const handleSync = () => {
       setIsWebGPUSupported(globalWebGPUSupported);
+      setIsFallbackMode(globalIsFallbackMode || globalWebGPUSupported === false);
       setIsModelReady(globalIsModelReady);
       setModelProgress(globalModelProgress);
       setProgressText(globalProgressText);
@@ -243,6 +259,22 @@ export function useWebLLM(): UseWebLLMReturn {
       setIsGenerating(true);
       setError(null);
 
+      // 1. If WebGPU is not supported or in fallback mode, stream immediate lightweight answer
+      if (globalIsFallbackMode || globalWebGPUSupported === false) {
+        let currentResponse = '';
+        for await (const chunk of streamFallbackResponse(trimmed)) {
+          currentResponse += chunk;
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === assistantId ? { ...msg, content: currentResponse } : msg
+            )
+          );
+        }
+        setIsGenerating(false);
+        return;
+      }
+
+      // 2. Otherwise run full WebLLM model
       try {
         let engine = globalEngine;
 
@@ -261,7 +293,18 @@ export function useWebLLM(): UseWebLLMReturn {
 
           engine = await initBackgroundModel();
           if (!engine) {
-            throw new Error(globalError || 'Model failed to initialize in browser.');
+            // Gracefully stream via fallback assistant instead of failing
+            let fallbackResponse = '';
+            for await (const chunk of streamFallbackResponse(trimmed)) {
+              fallbackResponse += chunk;
+              setMessages((prev) =>
+                prev.map((msg) =>
+                  msg.id === assistantId ? { ...msg, content: fallbackResponse } : msg
+                )
+              );
+            }
+            setIsGenerating(false);
+            return;
           }
         }
 
@@ -314,19 +357,17 @@ export function useWebLLM(): UseWebLLMReturn {
           }
         }
       } catch (err: any) {
-        console.error('WebLLM generation error:', err);
-        setError(err?.message || 'Error generating response.');
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === assistantId
-              ? {
-                  ...msg,
-                  content:
-                    'I ran into a temporary issue with the local model. Please check that WebGPU is enabled or try again in a few seconds!',
-                }
-              : msg
-          )
-        );
+        console.warn('WebLLM generation issue, serving graceful fallback answer:', err);
+        // Seamlessly serve response via lightweight assistant instead of showing an error
+        let fallbackResponse = '';
+        for await (const chunk of streamFallbackResponse(trimmed)) {
+          fallbackResponse += chunk;
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === assistantId ? { ...msg, content: fallbackResponse } : msg
+            )
+          );
+        }
       } finally {
         setIsGenerating(false);
       }
@@ -352,6 +393,7 @@ export function useWebLLM(): UseWebLLMReturn {
     isModelReady,
     activeModelId,
     isMobile,
+    isFallbackMode,
     messages,
     isGenerating,
     error,

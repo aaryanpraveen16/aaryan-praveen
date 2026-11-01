@@ -92,6 +92,18 @@ const Projects = () => {
                       >
                         <Github className="w-5 h-5" />
                       </a>
+                      
+                      {'liveUrl' in project && project.liveUrl && (
+                        <a 
+                          href={project.liveUrl as string} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary transition-colors"
+                          aria-label={`Visit ${project.title} live site`}
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                        </a>
+                      )}
                     </div>
                     
                     <Link 

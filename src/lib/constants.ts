@@ -100,6 +100,7 @@ export const projects = [
     image: PledgePilot,
     tags: ['React.js', 'Material-UI', 'D3.js', 'Redux', 'MongoDB'],
     githubUrl: 'https://github.com/aaryanpraveen16/pledgepilot',
+    liveUrl: 'https://pledgepilot-olg9.onrender.com',
     fullDescription: 'PledgePilot is an innovative crowdfunding platform specifically designed for hobbyists and creative individuals looking to bring their projects to life. The platform combines traditional crowdfunding mechanics with gamification elements and advanced data visualization to create an engaging experience for both project creators and backers. Built with a focus on user experience and data-driven insights, PledgePilot helps users make informed decisions about their investments and project support.',
     features: [
       'Campaign creation and management tools',
@@ -111,7 +112,6 @@ export const projects = [
       'Project discovery and filtering',
       'Backer engagement features'
     ],
-    // liveUrl: 'https://example.com',
   },
   {
     id: 6,
