@@ -6,6 +6,8 @@ import Nirmal from "../assets/Nirmal.jpeg"
 import CureConnect from "../assets/cure-connect.png"
 import PledgePilot from "../assets/pledge-pilot.jpg"
 import FreewaySimulator from "../assets/freeway-simulator.png"
+import EhiSleepwearNew from "../assets/ehisleepwear-new.png"
+import EhiSleepwearOld from "../assets/ehisleepwear-old.png"
 
 export const navLinks = [
   { name: 'Projects', href: '#projects' },
@@ -120,7 +122,7 @@ export const projects = [
     image: FreewaySimulator,
     tags: ['React', 'TypeScript', 'Python'],
     githubUrl: 'https://github.com/aaryanpraveen16/freeway-simulator',
-    liveUrl: 'https://freeway-simulator.vercel.app/',
+    liveUrl: 'https://freeway-simulator-gold.vercel.app/freeway-simulator',
     fullDescription: 'Freeway Simulator is a sophisticated traffic simulation tool developed as part of ongoing research at Northeastern University. The simulator models real-time vehicle dynamics with multiple agents to study and analyze traffic flow patterns, congestion control mechanisms, and lane changing behaviors. This work-in-progress tool applies probabilistic behavior models and safe-distance algorithms to create realistic traffic scenarios that help researchers understand and optimize traffic management strategies.',
     features: [
       'Real-time vehicle dynamics modeling',
@@ -131,6 +133,27 @@ export const projects = [
       'Lane changing behavior studies',
       'Traffic flow optimization research',
       'Simulation logging and data analysis'
+    ],
+  },
+  {
+    id: 7,
+    title: 'ehi sleepwear',
+    description: 'A direct-to-consumer sustainable sleepwear e-commerce storefront built with Shopify (Dawn 2.0), custom Liquid architecture, structured JSON-LD SEO/AEO, and conversion-optimized UX.',
+    image: EhiSleepwearNew,
+    comparisonImages: {
+      new: EhiSleepwearNew,
+      old: EhiSleepwearOld,
+      newLabel: 'Redesigned Storefront (Current UI/UX)',
+      oldLabel: 'Original Storefront (Before Redesign)'
+    },
+    tags: ['Shopify', 'Liquid', 'CSS3', 'SEO/AEO', 'JSON-LD', 'Klaviyo', 'UI/UX Design'],
+    liveUrl: 'https://ehisleepwear.com/',
+    fullDescription: 'ehi sleepwear is a direct-to-consumer sustainable sleepwear brand co-founded and engineered from the ground up. The production e-commerce storefront is built on Shopify (Dawn 2.0), featuring custom-coded Liquid templates, responsive CSS styling, and structured JSON-LD schemas for modern search and AI agent discoverability (SEO/AEO). The project encompassed an end-to-end UI/UX overhaul from a legacy design to a high-converting, mobile-responsive storefront with product trust badges, streamlined checkout funnels, Klaviyo dynamic review integrations, and sustainable textile sourcing directly from manufacturers in India.',
+    features: [
+      'Built and customized the e-commerce storefront using Shopify (Dawn 2.0), writing custom Liquid templates and CSS to create a tailored, responsive UI.',
+      'Improved site visibility for search engines and AI agents (SEO/AEO) by integrating JSON-LD structured data (Product, FAQPage) and resolving URL routing issues.',
+      'Redesigned key UI/UX elements to improve user conversion, including custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.',
+      'Designed the initial brand identity and partnered directly with manufacturers in India to source and produce sustainable TENCEL™ cotton sleepwear.'
     ],
   }
 ];
@@ -283,6 +306,32 @@ export const education = [
 export const workExperience = [
   {
     id: 1,
+    position: 'Technical Co-Founder',
+    company: 'ehi sleepwear',
+    location: 'Boston, MA (Remote)',
+    period: 'Dec 2025 - Present',
+    liveUrl: 'https://ehisleepwear.com/',
+    description: 'Co-founded and engineered a direct-to-consumer sustainable sleepwear brand, architecting the production Shopify e-commerce platform, brand identity, and complete UI/UX storefront overhaul.',
+    responsibilities: [
+      'Built and customized the e-commerce storefront using Shopify (Dawn 2.0), writing custom Liquid templates and CSS to create a tailored, responsive UI.',
+      'Improved site visibility for search engines and AI agents (SEO/AEO) by integrating JSON-LD structured data (Product, FAQPage) and resolving URL routing issues.',
+      'Redesigned key UI/UX elements to improve user conversion, including custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.',
+      'Designed the initial brand identity and partnered directly with manufacturers in India to source and produce sustainable TENCEL™ cotton sleepwear.'
+    ],
+    achievements: [
+      'Launched live production storefront at ehisleepwear.com with custom theme architecture and optimized conversion funnel',
+      'Engineered full storefront transformation from initial layout to a high-converting modern user experience'
+    ],
+    technologies: ['Shopify Liquid', 'Dawn 2.0', 'CSS3', 'JavaScript', 'JSON-LD', 'SEO/AEO', 'Klaviyo', 'UI/UX Design'],
+    comparison: {
+      before: EhiSleepwearOld,
+      after: EhiSleepwearNew,
+      beforeLabel: 'Initial Storefront (Before Redesign)',
+      afterLabel: 'Redesigned Storefront (New UI/UX)'
+    }
+  },
+  {
+    id: 2,
     position: 'Research Assistant',
     company: 'Northeastern University',
     location: 'Boston, MA',
@@ -297,7 +346,7 @@ export const workExperience = [
     technologies: ['Python', 'NumPy', 'Matplotlib']
   },
   {
-    id: 2,
+    id: 3,
     position: 'Associate Full Stack Software Engineer',
     company: 'Flair Labs',
     location: 'India',
@@ -316,7 +365,7 @@ export const workExperience = [
     technologies: ['React.js', 'JavaScript', 'Spring Boot', 'Typescript', 'MySQL', 'Docker', 'Kubernetes']
   },
   {
-    id: 3,
+    id: 4,
     position: 'Data Analytics Intern',
     company: 'Ramrao Adik Institute of Technology',
     location: 'Navi Mumbai, MH, India',

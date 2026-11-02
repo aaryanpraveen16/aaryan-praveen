@@ -1,4 +1,3 @@
-
 import { projects } from '@/lib/constants';
 import { useInView } from '@/lib/animations';
 import { useRef } from 'react';
@@ -34,12 +33,12 @@ const Projects = () => {
             "text-muted-foreground opacity-0 transition-opacity duration-700 delay-200",
             isInView && "opacity-100"
           )}>
-            Showcasing some of my recent work and creative solutions.
+            Showcasing some of my recent work, production platforms, and creative solutions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.slice(0, 3).map((project, index) => {
+          {projects.slice(0, 6).map((project, index) => {
             const projectRef = useRef<HTMLDivElement>(null);
             const isProjectInView = useInView(projectRef, 0.2);
             
@@ -124,7 +123,7 @@ const Projects = () => {
             to="/projects" 
             className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
-            View All Projects <ArrowRight className="ml-2 w-5 h-5" />
+            View All Projects ({projects.length}) <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
         </div>
       </div>

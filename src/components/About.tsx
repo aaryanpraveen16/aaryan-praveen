@@ -79,7 +79,7 @@ const About = () => {
               With 2 years of industry experience, I’ve worked across frontend, backend, and cloud technologies, crafting intuitive user experiences and robust backend architectures.
               </p>
               <p className="text-muted-foreground">
-              Outside of coding, I spend time exploring blockchain technology, competing in hackathons, and training in powerlifting and calisthenics. I also enjoy playing table tennis whenever I get the chance.
+              Outside of coding, I spend time competing in hackathons, and training in powerlifting and calisthenics. I also enjoy playing table tennis whenever I get the chance.
               </p>
             </div>
 

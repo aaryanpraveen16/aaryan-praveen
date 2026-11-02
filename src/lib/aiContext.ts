@@ -40,8 +40,12 @@ WORK EXPERIENCE:
    - Recognition: Awarded the "Budding Star Award" (June 2023) for outstanding engineering contribution.
    - Testimonial: Founder Daljeet Malhotra praised Aaryan's diligence, structured problem-solving, and leadership traits.
 
-3. Founder & Lead Developer — ehi sleepwear (Dec 2025 - Present)
-   - Built and operates a direct-to-consumer (D2C) e-commerce brand, engineering custom Shopify storefronts using Shopify CLI, Liquid templates, custom themes, and vector brand assets.
+3. Technical Co-Founder — ehi sleepwear (Dec 2025 - Present | Boston, MA / Remote)
+   - Live Store: https://ehisleepwear.com/
+   - Built and customized the e-commerce storefront using Shopify (Dawn 2.0), writing custom Liquid templates and CSS to create a tailored, responsive UI.
+   - Improved site visibility for search engines and AI agents (SEO/AEO) by integrating JSON-LD structured data (Product, FAQPage) and resolving URL routing issues.
+   - Redesigned key UI/UX elements to improve user conversion, including custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.
+   - Designed the initial brand identity and partnered directly with manufacturers in India to source and produce sustainable TENCEL™ cotton sleepwear.
 
 4. Data Analytics Intern — Ramrao Adik Institute of Technology (June 2020 - Aug 2020 | Navi Mumbai, India)
    - Conducted Exploratory Data Analysis (EDA) on COVID-19 datasets and built interactive visualizations.
@@ -55,7 +59,7 @@ FEATURED PROJECTS:
 2. NimbleDev
    - In-browser cloud IDE and development sandbox featuring live previews, session-aware state management, interactive file tree, and terminal CLI.
    - Tech: React, TypeScript, Node.js, Express, WebSockets, Docker containerization, Kubernetes orchestration.
-3. Freeway Simulator (freeway-simulator.vercel.app)
+3. Freeway Simulator (https://freeway-simulator-gold.vercel.app/freeway-simulator)
    - Multi-agent interactive traffic simulator modeling real-time vehicle dynamics with 100+ autonomous vehicles, congestion control, and MOBIL/IDM lane-changing algorithms.
    - Tech: React, TypeScript, Python.
 4. Bare-Metal Ubuntu Homelab & Local AI Cluster
@@ -70,6 +74,10 @@ FEATURED PROJECTS:
    - Full-stack crowdfunding platform with dynamic D3.js analytics visualizations and gamified creator rewards.
    - Live URL: https://pledgepilot-olg9.onrender.com
    - Tech: React.js, Redux, Material-UI, D3.js, MongoDB.
+8. ehi sleepwear (https://ehisleepwear.com/)
+   - Direct-to-consumer sustainable sleepwear e-commerce storefront built with Shopify (Dawn 2.0), custom Liquid architecture, structured JSON-LD SEO/AEO, and conversion-optimized UX.
+   - Features custom homepage layouts, product trust badges, Klaviyo dynamic review integrations, and sustainable TENCEL™ cotton sleepwear.
+   - Tech: Shopify, Liquid, CSS3, JavaScript, JSON-LD, SEO/AEO, Klaviyo, UI/UX Design.
 
 ---
 KEY AWARDS & INTELLECTUAL PROPERTY:

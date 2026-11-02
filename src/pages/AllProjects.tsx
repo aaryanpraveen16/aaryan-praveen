@@ -1,34 +1,29 @@
-
 import { projects } from '@/lib/constants';
 import { useInView } from '@/lib/animations';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github, ArrowUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AllProjects = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, 0.1);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-24" ref={sectionRef}>
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Back Button */}
+        <div className="mb-8">
+          <Link 
+            to="/" 
+            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="mr-2 w-5 h-5" />
+            Back to Home
+          </Link>
+        </div>
+
+        <div className="text-center max-w-md mx-auto mb-16">
           <span className={cn(
             "inline-block px-4 py-1.5 mb-4 text-sm rounded-full bg-secondary/80 text-secondary-foreground backdrop-blur-sm opacity-0 transition-opacity duration-700",
             isInView && "opacity-100"
@@ -36,7 +31,7 @@ const AllProjects = () => {
             Portfolio
           </span>
           <h1 className={cn(
-            "text-4xl md:text-5xl font-bold mb-6 opacity-0 transition-opacity duration-700 delay-100",
+            "text-3xl md:text-4xl font-bold mb-4 opacity-0 transition-opacity duration-700 delay-100",
             isInView && "opacity-100"
           )}>
             All Projects
@@ -45,14 +40,14 @@ const AllProjects = () => {
             "text-muted-foreground opacity-0 transition-opacity duration-700 delay-200",
             isInView && "opacity-100"
           )}>
-            A comprehensive collection of all my development work, showcasing a diverse range of skills and technologies.
+            A comprehensive collection of my work, experiments, and open-source contributions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => {
             const projectRef = useRef<HTMLDivElement>(null);
-            const isProjectInView = useInView(projectRef, 0.1);
+            const isProjectInView = useInView(projectRef, 0.2);
             
             return (
               <div 
@@ -133,26 +128,13 @@ const AllProjects = () => {
         
         <div className="mt-16 text-center">
           <Link 
-            to="/"
-            className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            to="/" 
+            className="inline-flex items-center px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
           >
-            Back to Home
+            <ArrowLeft className="mr-2 w-5 h-5" /> Back to Home
           </Link>
         </div>
       </div>
-      
-      <button
-        onClick={scrollToTop}
-        className={cn(
-          "fixed bottom-8 right-8 p-3 rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 z-40",
-          showScrollTop 
-            ? "opacity-100 translate-y-0" 
-            : "opacity-0 translate-y-10 pointer-events-none"
-        )}
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-5 h-5" />
-      </button>
     </div>
   );
 };

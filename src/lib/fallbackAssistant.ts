@@ -18,6 +18,7 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
 - **PoliSightsAI** (Civic Tech Hackathon Winner): Automated real-time policy intelligence tracker using NLP, vector search (Pinecone), FastAPI, and React.
 - **NimbleDev**: In-browser cloud IDE sandbox featuring live preview execution, terminal CLI, Docker containerization, and WebSockets.
 - **Freeway Simulator**: Swarm traffic dynamics simulator modeling 100+ autonomous vehicles using MOBIL and IDM lane-changing algorithms.
+- **ehi sleepwear** ([ehisleepwear.com](https://ehisleepwear.com)): Custom Shopify (Dawn 2.0) e-commerce storefront with Liquid architecture, JSON-LD SEO/AEO, and conversion-optimized UX.
 - **CoinGuard**: HD cryptocurrency wallet supporting Solana and Ethereum with client-side key derivation.
 - **PledgePilot & CureConnect**: Crowdfunding analytics platform (D3.js) and healthcare monitoring system.`
   },
@@ -31,7 +32,7 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
   },
   {
     keywords: ['freeway', 'traffic', 'simulation', 'mobil', 'idm'],
-    response: `**Freeway Simulator** ([freeway-simulator.vercel.app](https://freeway-simulator.vercel.app)) models real-time vehicle flow dynamics with 100+ autonomous agents using the Intelligent Driver Model (IDM) and MOBIL lane-switching algorithms in React, TypeScript, and Python.`
+    response: `**Freeway Simulator** ([freeway-simulator-gold.vercel.app](https://freeway-simulator-gold.vercel.app/freeway-simulator)) models real-time vehicle flow dynamics with 100+ autonomous agents using the Intelligent Driver Model (IDM) and MOBIL lane-switching algorithms in React, TypeScript, and Python.`
   },
   {
     keywords: ['coinguard', 'crypto', 'wallet', 'web3', 'solana', 'ethereum'],
@@ -40,6 +41,14 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
   {
     keywords: ['pledgepilot', 'pledge', 'crowdfunding'],
     response: `**PledgePilot** ([pledgepilot-olg9.onrender.com](https://pledgepilot-olg9.onrender.com)) is an innovative crowdfunding platform designed for hobbyists and creators to launch and manage campaigns with dynamic D3.js data visualizations and gamified rewards.`
+  },
+  {
+    keywords: ['ehi', 'sleepwear', 'shopify', 'dawn', 'tencel', 'ecommerce', 'store'],
+    response: `**ehi sleepwear** ([ehisleepwear.com](https://ehisleepwear.com)) is a direct-to-consumer sustainable sleepwear brand co-founded and engineered by Aaryan:
+- **Shopify Dawn 2.0 Storefront**: Custom Liquid templates and CSS creating a tailored, responsive UI.
+- **Search & AI Visibility (SEO/AEO)**: Integrated JSON-LD structured data (Product, FAQPage) and resolved routing issues.
+- **Conversion-Optimized Redesign**: Custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.
+- **Brand & Sustainable Sourcing**: Designed brand identity and partnered directly with manufacturers in India for sustainable TENCEL™ cotton sleepwear.`
   },
   {
     keywords: ['experience', 'job', 'work', 'career', 'role', 'company', 'flair', 'northeastern'],
@@ -54,8 +63,11 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
    - Hardened Java Spring Boot microservices and containerized workflows with Docker.
    - Awarded the *Budding Star Award* (June 2023); commended by Founder Daljeet Malhotra.
 
-3. **Founder & Lead Developer** — ehi sleepwear (Dec 2025 – Present):
-   - Direct-to-consumer e-commerce brand with custom Shopify CLI and Liquid storefront.`
+3. **Technical Co-Founder** — ehi sleepwear (Dec 2025 – Present | [ehisleepwear.com](https://ehisleepwear.com)):
+   - Built custom Shopify (Dawn 2.0) storefront with bespoke Liquid templates and responsive CSS.
+   - Improved search and AI agent visibility (SEO/AEO) via JSON-LD structured data and routing optimization.
+   - Redesigned conversion UI/UX with trust badges and Klaviyo dynamic reviews.
+   - Designed brand identity and partnered with manufacturers in India for sustainable TENCEL™ cotton sleepwear.`
   },
   {
     keywords: ['education', 'degree', 'university', 'college', 'school', 'gpa', 'study', 'master', 'bachelor'],

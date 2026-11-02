@@ -1,10 +1,9 @@
-
+import { useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from '@/lib/constants';
 import { useInView } from '@/lib/animations';
-import { useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -12,6 +11,7 @@ const ProjectDetail = () => {
   const { projectName } = useParams();
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, 0.1);
+  const [activeImageTab, setActiveImageTab] = useState<'new' | 'old'>('new');
 
   // Find project by converting title to URL-friendly format
   const project = projects.find(p => 
@@ -35,6 +35,8 @@ const ProjectDetail = () => {
       </div>
     );
   }
+
+  const hasComparison = 'comparisonImages' in project && Boolean((project as any).comparisonImages);
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,13 +102,67 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            {/* Project Image */}
+            {/* Project Image / Comparison View */}
             <div className="relative">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full rounded-xl shadow-2xl"
-              />
+              {hasComparison ? (
+                <div>
+                  <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      UI/UX Showcase
+                    </span>
+                    <div className="inline-flex rounded-lg bg-secondary/80 p-0.5 border border-border">
+                      <button
+                        type="button"
+                        onClick={() => setActiveImageTab('new')}
+                        className={cn(
+                          "px-3 py-1.5 text-xs font-medium rounded-md transition-all",
+                          activeImageTab === 'new'
+                            ? "bg-background text-foreground shadow-sm font-semibold"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        ✨ Redesigned (New)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveImageTab('old')}
+                        className={cn(
+                          "px-3 py-1.5 text-xs font-medium rounded-md transition-all",
+                          activeImageTab === 'old'
+                            ? "bg-background text-foreground shadow-sm font-semibold"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        ⏳ Original (Old)
+                      </button>
+                    </div>
+                  </div>
+                  <div className="relative rounded-xl overflow-hidden shadow-2xl border border-border bg-muted/20">
+                    <img 
+                      src={activeImageTab === 'new' ? (project as any).comparisonImages.new : (project as any).comparisonImages.old} 
+                      alt={activeImageTab === 'new' ? (project as any).comparisonImages.newLabel : (project as any).comparisonImages.oldLabel}
+                      className="w-full h-auto max-h-[500px] object-cover object-top transition-all duration-300"
+                    />
+                    <div className="p-3 bg-card/90 backdrop-blur-sm border-t border-border flex items-center justify-between text-xs">
+                      <span className="font-medium text-foreground">
+                        {activeImageTab === 'new' ? (project as any).comparisonImages.newLabel : (project as any).comparisonImages.oldLabel}
+                      </span>
+                      <span className={cn(
+                        "text-[10px] px-2 py-0.5 rounded-full font-medium",
+                        activeImageTab === 'new' ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                      )}>
+                        {activeImageTab === 'new' ? 'Live Storefront' : 'Pre-Redesign'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full rounded-xl shadow-2xl"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -120,7 +176,7 @@ const ProjectDetail = () => {
                 <CardTitle>About This Project</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                   {project.fullDescription}
                 </p>
               </CardContent>
@@ -131,9 +187,9 @@ const ProjectDetail = () => {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle>Key Features</CardTitle>
+                <CardTitle>Key Features & Impact</CardTitle>
                 <CardDescription>
-                  Main capabilities and functionalities
+                  Core responsibilities and technical deliverables
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -141,7 +197,7 @@ const ProjectDetail = () => {
                   {project.features?.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">{feature}</span>
+                      <span className="text-sm text-muted-foreground leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -149,6 +205,66 @@ const ProjectDetail = () => {
             </Card>
           </div>
         </div>
+
+        {/* Before & After Detailed Transformation (if comparison images available) */}
+        {hasComparison && (
+          <div className="mt-12">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                  <CardTitle>Storefront Redesign: Before vs After</CardTitle>
+                </div>
+                <CardDescription>
+                  Side-by-side visual progression showing the transition from the original baseline storefront to the custom-coded, high-converting modern Shopify Dawn 2.0 experience.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Before */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-semibold text-sm text-muted-foreground flex items-center gap-1.5">
+                        ⏳ Original Storefront (Old)
+                      </h4>
+                      <Badge variant="outline" className="text-amber-600 border-amber-500/30">Before</Badge>
+                    </div>
+                    <div className="rounded-lg overflow-hidden border border-border bg-muted/20 shadow-sm aspect-[4/5] overflow-y-auto">
+                      <img 
+                        src={(project as any).comparisonImages.old} 
+                        alt="Original Storefront" 
+                        className="w-full h-auto object-cover object-top"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Initial baseline layout prior to custom Liquid templates, SEO/AEO optimizations, and product trust badges.
+                    </p>
+                  </div>
+
+                  {/* After */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-semibold text-sm text-foreground flex items-center gap-1.5">
+                        ✨ Redesigned Storefront (New UI/UX)
+                      </h4>
+                      <Badge variant="default" className="bg-emerald-600 hover:bg-emerald-700 text-white">Current Production</Badge>
+                    </div>
+                    <div className="rounded-lg overflow-hidden border border-border bg-muted/20 shadow-sm aspect-[4/5] overflow-y-auto ring-2 ring-primary/20">
+                      <img 
+                        src={(project as any).comparisonImages.new} 
+                        alt="Redesigned Storefront" 
+                        className="w-full h-auto object-cover object-top"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Bespoke Shopify Dawn 2.0 architecture with tailored Liquid templates, Klaviyo dynamic review integrations, and conversion-optimized checkout funnel.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Related Projects */}
         <div className="mt-16">
