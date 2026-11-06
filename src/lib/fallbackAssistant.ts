@@ -44,15 +44,15 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
   },
   {
     keywords: ['ehi', 'sleepwear', 'shopify', 'dawn', 'tencel', 'ecommerce', 'store'],
-    response: `**ehi sleepwear** ([ehisleepwear.com](https://ehisleepwear.com)) is a direct-to-consumer sustainable sleepwear brand co-founded and engineered by Aaryan:
-- **Shopify Dawn 2.0 Storefront**: Custom Liquid templates and CSS creating a tailored, responsive UI.
-- **Search & AI Visibility (SEO/AEO)**: Integrated JSON-LD structured data (Product, FAQPage) and resolved routing issues.
-- **Conversion-Optimized Redesign**: Custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.
-- **Brand & Sustainable Sourcing**: Designed brand identity and partnered directly with manufacturers in India for sustainable TENCEL™ cotton sleepwear.`
+    response: `**ehi sleepwear** ([ehisleepwear.com](https://ehisleepwear.com)) — Technical Co-Founder (March 2025 – Present | Remote):
+- **Storefront & Theme Architecture**: Built and launched the e-commerce storefront, implementing custom layouts and UI components with Liquid, CSS, and JavaScript.
+- **Technical SEO**: Integrated structured product and FAQ data (JSON-LD) and resolved URL routing and discoverability issues.
+- **Customer Presentation**: Developed product trust indicators and Klaviyo dynamic review integrations.
+- **Product Sourcing & Brand**: Contributed to initial brand identity and coordinated directly with manufacturers in India on product sourcing and development.`
   },
   {
     keywords: ['experience', 'job', 'work', 'career', 'role', 'company', 'flair', 'northeastern'],
-    response: `Aaryan has **2.5+ years of software engineering experience**:
+    response: `Aaryan has **3 years of software engineering experience**:
 
 1. **Research Assistant** — Northeastern University (Jan 2025 – Present | Boston, MA):
    - Microscopic traffic simulation models and multi-agent swarm optimization (IDM/MOBIL).
@@ -63,11 +63,11 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
    - Hardened Java Spring Boot microservices and containerized workflows with Docker.
    - Awarded the *Budding Star Award* (June 2023); commended by Founder Daljeet Malhotra.
 
-3. **Technical Co-Founder** — ehi sleepwear (Dec 2025 – Present | [ehisleepwear.com](https://ehisleepwear.com)):
-   - Built custom Shopify (Dawn 2.0) storefront with bespoke Liquid templates and responsive CSS.
-   - Improved search and AI agent visibility (SEO/AEO) via JSON-LD structured data and routing optimization.
-   - Redesigned conversion UI/UX with trust badges and Klaviyo dynamic reviews.
-   - Designed brand identity and partnered with manufacturers in India for sustainable TENCEL™ cotton sleepwear.`
+3. **Technical Co-Founder** — ehi sleepwear (March 2025 – Present | Remote | [ehisleepwear.com](https://ehisleepwear.com)):
+   - Co-founded a direct-to-consumer sleepwear brand, taking ownership of its digital presence, technical implementation, and e-commerce operations.
+   - Built and launched the custom Shopify storefront with Liquid, CSS, and JavaScript.
+   - Integrated JSON-LD structured data (Product, FAQPage) and resolved technical SEO routing.
+   - Built customer-facing trust indicators, Klaviyo review integrations, and managed product sourcing in India.`
   },
   {
     keywords: ['education', 'degree', 'university', 'college', 'school', 'gpa', 'study', 'master', 'bachelor'],
@@ -115,7 +115,13 @@ const FAQ_KNOWLEDGE_BASE: FAQResponse[] = [
   },
   {
     keywords: ['about', 'who is', 'bio', 'summary', 'overview'],
-    response: `**Aaryan Praveen** is a Full-Stack Software Engineer & AI Systems Developer with 2.5+ years of experience across scalable web architectures, microservices, and AI engineering. He holds an MS in Software Engineering Systems from Northeastern University and is open to full-time roles and collaborations.`
+    response: `### Hey, I'm Aaryan.
+
+I build software, figure out how things work, and enjoy taking ideas from concept to something people can actually use.
+
+With 3 years of experience, I've worked across full-stack engineering, AI-powered applications, and e-commerce, including building products from scratch and working directly with business stakeholders.
+
+I'm particularly drawn to work that sits across engineering, product, and business, where I can understand a problem, figure out what needs to be done, and help make it happen.`
   }
 ];
 

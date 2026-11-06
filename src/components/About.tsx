@@ -71,15 +71,18 @@ const About = () => {
                 isBioInView && "opacity-100 translate-x-0"
               )}
             >
-              <h3 className="text-2xl font-bold mb-4">Hello, I'm Aaryan</h3>
+              <h3 className="text-2xl font-bold mb-4">Hey, I'm Aaryan</h3>
               <p className="text-muted-foreground mb-6">
-              I'm a full-stack software engineer with a background in electronics engineering, now focused on building scalable, secure, and intelligent applications.
+                I build software, figure out how things work, and enjoy taking ideas from concept to something people can actually use.
               </p>
               <p className="text-muted-foreground mb-6">
-              With 2 years of industry experience, I’ve worked across frontend, backend, and cloud technologies, crafting intuitive user experiences and robust backend architectures.
+                With 3 years of experience, I've worked across full-stack engineering, AI-powered applications, and e-commerce, including building products from scratch and working directly with business stakeholders.
+              </p>
+              <p className="text-muted-foreground mb-6">
+                I'm particularly drawn to work that sits across engineering, product, and business, where I can understand a problem, figure out what needs to be done, and help make it happen.
               </p>
               <p className="text-muted-foreground">
-              Outside of coding, I spend time competing in hackathons, and training in powerlifting and calisthenics. I also enjoy playing table tennis whenever I get the chance.
+                Outside of coding, I spend time competing in hackathons, and training in powerlifting and calisthenics. I also enjoy playing table tennis whenever I get the chance.
               </p>
             </div>
 

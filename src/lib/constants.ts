@@ -138,7 +138,7 @@ export const projects = [
   {
     id: 7,
     title: 'ehi sleepwear',
-    description: 'A direct-to-consumer sustainable sleepwear e-commerce storefront built with Shopify (Dawn 2.0), custom Liquid architecture, structured JSON-LD SEO/AEO, and conversion-optimized UX.',
+    description: 'A direct-to-consumer sleepwear brand e-commerce storefront built with Shopify, custom Liquid architecture, structured JSON-LD SEO, and conversion-optimized UX.',
     image: EhiSleepwearNew,
     comparisonImages: {
       new: EhiSleepwearNew,
@@ -146,14 +146,15 @@ export const projects = [
       newLabel: 'Redesigned Storefront (Current UI/UX)',
       oldLabel: 'Original Storefront (Before Redesign)'
     },
-    tags: ['Shopify', 'Liquid', 'CSS3', 'SEO/AEO', 'JSON-LD', 'Klaviyo', 'UI/UX Design'],
-    liveUrl: 'https://ehisleepwear.com/',
-    fullDescription: 'ehi sleepwear is a direct-to-consumer sustainable sleepwear brand co-founded and engineered from the ground up. The production e-commerce storefront is built on Shopify (Dawn 2.0), featuring custom-coded Liquid templates, responsive CSS styling, and structured JSON-LD schemas for modern search and AI agent discoverability (SEO/AEO). The project encompassed an end-to-end UI/UX overhaul from a legacy design to a high-converting, mobile-responsive storefront with product trust badges, streamlined checkout funnels, Klaviyo dynamic review integrations, and sustainable textile sourcing directly from manufacturers in India.',
+    tags: ['Shopify', 'Liquid', 'CSS', 'JavaScript', 'JSON-LD', 'Technical SEO', 'Klaviyo', 'UI/UX Design'],
+    liveUrl: 'https://ehisleepwear.com',
+    fullDescription: 'Co-founded a direct-to-consumer sleepwear brand, taking ownership of its digital presence and technical implementation while working across product, branding, and e-commerce operations. The project encompassed building and launching the brand\'s e-commerce storefront, implementing custom storefront layouts and UI components with Liquid, CSS, and JavaScript, integrating structured product/FAQ data (JSON-LD), addressing technical SEO and URL routing issues, designing product trust indicators and Klaviyo review integrations, and coordinating directly with manufacturers in India on product sourcing and development.',
     features: [
-      'Built and customized the e-commerce storefront using Shopify (Dawn 2.0), writing custom Liquid templates and CSS to create a tailored, responsive UI.',
-      'Improved site visibility for search engines and AI agents (SEO/AEO) by integrating JSON-LD structured data (Product, FAQPage) and resolving URL routing issues.',
-      'Redesigned key UI/UX elements to improve user conversion, including custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.',
-      'Designed the initial brand identity and partnered directly with manufacturers in India to source and produce sustainable TENCEL™ cotton sleepwear.'
+      "Built and launched the brand's e-commerce storefront, customizing the Shopify experience to create a responsive shopping experience tailored to the brand.",
+      "Implemented custom storefront layouts and UI components, working with Liquid, CSS, and JavaScript to extend the existing Shopify theme.",
+      "Integrated structured product and FAQ data (JSON-LD) and addressed technical SEO issues, including URL routing and page discoverability.",
+      "Worked on product presentation and customer-facing features, including product trust indicators and Klaviyo review integrations.",
+      "Contributed to the initial brand identity and coordinated directly with manufacturers in India on product sourcing and development."
     ],
   }
 ];
@@ -308,21 +309,19 @@ export const workExperience = [
     id: 1,
     position: 'Technical Co-Founder',
     company: 'ehi sleepwear',
-    location: 'Boston, MA (Remote)',
-    period: 'Dec 2025 - Present',
-    liveUrl: 'https://ehisleepwear.com/',
-    description: 'Co-founded and engineered a direct-to-consumer sustainable sleepwear brand, architecting the production Shopify e-commerce platform, brand identity, and complete UI/UX storefront overhaul.',
+    location: 'Remote',
+    period: 'March 2025 – Present',
+    liveUrl: 'https://ehisleepwear.com',
+    description: 'Co-founded a direct-to-consumer sleepwear brand, taking ownership of its digital presence and technical implementation while working across product, branding, and e-commerce operations.',
+    responsibilitiesTitle: 'What I worked on:',
     responsibilities: [
-      'Built and customized the e-commerce storefront using Shopify (Dawn 2.0), writing custom Liquid templates and CSS to create a tailored, responsive UI.',
-      'Improved site visibility for search engines and AI agents (SEO/AEO) by integrating JSON-LD structured data (Product, FAQPage) and resolving URL routing issues.',
-      'Redesigned key UI/UX elements to improve user conversion, including custom homepage layouts, product trust badges, and Klaviyo dynamic review integrations.',
-      'Designed the initial brand identity and partnered directly with manufacturers in India to source and produce sustainable TENCEL™ cotton sleepwear.'
+      "Built and launched the brand's e-commerce storefront, customizing the Shopify experience to create a responsive shopping experience tailored to the brand.",
+      "Implemented custom storefront layouts and UI components, working with Liquid, CSS, and JavaScript to extend the existing Shopify theme.",
+      "Integrated structured product and FAQ data (JSON-LD) and addressed technical SEO issues, including URL routing and page discoverability.",
+      "Worked on product presentation and customer-facing features, including product trust indicators and Klaviyo review integrations.",
+      "Contributed to the initial brand identity and coordinated directly with manufacturers in India on product sourcing and development."
     ],
-    achievements: [
-      'Launched live production storefront at ehisleepwear.com with custom theme architecture and optimized conversion funnel',
-      'Engineered full storefront transformation from initial layout to a high-converting modern user experience'
-    ],
-    technologies: ['Shopify Liquid', 'Dawn 2.0', 'CSS3', 'JavaScript', 'JSON-LD', 'SEO/AEO', 'Klaviyo', 'UI/UX Design'],
+    technologies: ['Shopify Liquid', 'CSS', 'JavaScript', 'JSON-LD', 'Technical SEO', 'Klaviyo', 'UI/UX Design', 'Product Sourcing'],
     comparison: {
       before: EhiSleepwearOld,
       after: EhiSleepwearNew,

@@ -106,7 +106,7 @@ const Experience = () => {
                       <p>{experience.description}</p>
                     </div>
                     
-                    <h4 className="font-semibold mb-3 text-sm">Key Responsibilities:</h4>
+                    <h4 className="font-semibold mb-3 text-sm">{('responsibilitiesTitle' in experience && (experience as any).responsibilitiesTitle) || 'Key Responsibilities:'}</h4>
                     <ul className="space-y-2">
                       {experience.responsibilities.map((item, idx) => (
                         <li key={idx} className="text-sm flex gap-2 text-muted-foreground">

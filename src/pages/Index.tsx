@@ -20,6 +20,26 @@ const Index = () => {
   });
   const [showNavbarLogo, setShowNavbarLogo] = useState(hasSeenIntro);
 
+  // Disable scrolling while the initial loading/intro animation is active
+  useEffect(() => {
+    if (!hasSeenIntro) {
+      window.scrollTo(0, 0);
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.touchAction = '';
+      };
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+  }, [hasSeenIntro]);
+
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);

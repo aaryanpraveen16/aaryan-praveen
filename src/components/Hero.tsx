@@ -12,7 +12,7 @@ const Hero = ({ onAnimationArrival, skipIntro = false }: HeroProps) => {
   const parallaxOffset = useParallax(0.05);
   const heroRef = useRef<HTMLElement>(null);
   const flyingTextRef = useRef<HTMLDivElement>(null);
-  
+
   // Stages: 'scrambling' | 'moving' | 'done'
   const [animStage, setAnimStage] = useState<'scrambling' | 'moving' | 'done'>(
     skipIntro ? 'done' : 'scrambling'
@@ -53,9 +53,9 @@ const Hero = ({ onAnimationArrival, skipIntro = false }: HeroProps) => {
         // Calculate delta translation to the target's center/top-left
         const deltaX = targetRect.left - heroRect.left;
         const deltaY = targetRect.top - heroRect.top;
-        
+
         // Calculate scale ratio between target font size and initial font size
-        const scale = (targetRect.height && heroRect.height) 
+        const scale = (targetRect.height && heroRect.height)
           ? Math.min(Math.max(targetRect.height / heroRect.height, 0.18), 0.35)
           : 0.25;
 
@@ -94,7 +94,7 @@ const Hero = ({ onAnimationArrival, skipIntro = false }: HeroProps) => {
     >
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-dot-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-        <div 
+        <div
           className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-primary/[0.04] dark:bg-primary/[0.07] rounded-full blur-3xl"
           style={{ transform: `translate(-50%, ${parallaxOffset * 1.2}px)` }}
         />
@@ -138,7 +138,7 @@ const Hero = ({ onAnimationArrival, skipIntro = false }: HeroProps) => {
 
             <div className={`animate-on-load opacity-0 flex flex-col sm:flex-row items-center gap-4 ${contentVisible ? '' : 'hidden'}`}>
               <a
-                href="/resume.pdf"
+                href="/aaryan_resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all hover:translate-y-[-2px] active:translate-y-[0px]"
